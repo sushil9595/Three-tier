@@ -1,0 +1,7 @@
+{
+    "customCss"       : ".curl-command { display: none }",
+    "customSiteTitle" : "Aquila : Api's documentation",
+    "swaggerOptions"  : {
+        "docExpansion" : "none"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "myPromoSchema": {
+        "description": "",
+        "properties": {
+            "promoId"     : {"type": "string", "format": "ObjectId", "description": "ref promo"},
+            "promoCodeId" : {"type": "string", "format": "ObjectId", "description": "L'id d'un promo.codes[i].code"},
+            "discountATI" : {"type": "number", "default": null},
+            "discountET"  : {"type": "number", "default": null},
+            "name"        : {"type": "string"},
+            "description" : {"type": "string"},
+            "code"        : {"type": "string"},
+            "gifts"       : {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/itemSchema"
+                }
+            },
+            "productsId"  : {
+                "type": "array",
+                "description": "Si des items sont dans ce tableau alors la promo s'appliquera a ces produits",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "productId"    : {"type": "string", "format": "ObjectId", "description": "ref products"},
+                        "discountATI"  : {"type": "number", "default": null, "description": "Chaque produit a une discount différente car son prix est différent"},
+                        "discountET"   : {"type": "number", "default": null},
+                        "basePriceET"  : {"type": "number", "default": null},
+                        "basePriceATI" : {"type": "number", "default": null}
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "t1": "Languages",
+    "ph1": "Position",
+    "addLang": "Add a language",
+    "modLang": "Modify a language",
+    "code": "Code",
+    "des": "Designation",
+    "des2": "Designation",
+    "indiff": "Indifferent",
+    "visible2": "Visible",
+    "invisible": "Not visible",
+    "pos": "Position",
+    "img": "Picture",
+    "add": "Add",
+    "defaultLang": "Default language",
+    "visible": "Visible on website",
+    "cancel": "Cancel",
+    "valider": "Submit",
+    "defLang": "Default language",
+    "status": "Status",
+    "act": "Actions",
+    "delete": "Delete",
+    "alreadyExist": "Already exist",
+    "saveFirst": "You must save the language first before adding a picture",
+    "toast": {
+        "defaultLangChang": "The default lang has been changed",
+        "needActions": "You need to rebuild the theme and restart the server to fully implement the change"
+    }
+}

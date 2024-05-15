@@ -1,0 +1,12 @@
+{
+    "t1": "Translation",
+    "translateFile": "File to translate:",
+    "reboot": "Apply to website (reboot)",
+    "translateSaved": "Traduction sauvegardés !",
+    "buildSucceed": "Build succeed, restarting the server",
+    "buildFailed": "Build failed or long",
+    "nb": "Note : For apply change to website, click on 'Apply to website (reboot)'",
+    "toast": {
+        "invalidJSON": "Invalid JSON"
+    }
+}

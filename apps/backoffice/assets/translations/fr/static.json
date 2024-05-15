@@ -1,0 +1,49 @@
+{
+    "detail": {
+        "t1": "Détail Page",
+        "lastModif": "Date de dernière modification",
+        "active": "Active",
+        "title": "Titre",
+        "metaDesc": "Méta description",
+        "slug": "Slug",
+        "preview": "Prévisualiser",
+        "save": "Enregistrer",
+        "index": "Indexer la page",
+        "group": "Groupe",
+        "html": "HTML",
+        "variables": "Variables",
+        "result": "Resultat",
+        "pageSaved": "Page sauvegardée !",
+        "noVars": "Pas de variables"
+    },
+    "list": {
+        "t1": "Pages statiques",
+        "ph1": "Rechercher...",
+        "code": "Code",
+        "etats": "États",
+        "search": "Recherche"
+    },
+    "new": {
+        "t1": "Créer une Nouvelle Page",
+        "ph1": "Code",
+        "ph2": "Nom",
+        "ph3": "Generation automatique par le nom si vide",
+        "ph4": "Titre",
+        "ph5": "Meta description",
+        "code": "Code",
+        "nom": "Nom",
+        "slug": "Slug",
+        "title": "Titre",
+        "metaDesc": "Méta description",
+        "preview": "Prévisualiser",
+        "save": "Enregistrer",
+        "group": "Groupe",
+        "html": "HTML",
+        "variables": "Variables",
+        "result": "Resultat",
+        "noVars": "Pas de variables"
+    },
+    "toast": {
+        "missingVar": "Avertissement: variables manquantes"
+    }
+}

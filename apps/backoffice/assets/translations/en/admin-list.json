@@ -1,0 +1,22 @@
+{
+    "t1": "Edit admin",
+    "t2": "Create new admin",
+    "t3": "Administrators listing",
+    "ph1": "Search...",
+    
+    "prenom": "First name",
+    "prenom2": "First name",
+    "nom": "Last name",
+    "username": "Username",
+    "mail": "E-mail",
+    "cocher": "Aquila features access:",
+    "customer": "Customer card",
+    "reset": "Reset",
+    "cancel": "Cancel",
+    "save": "Save",
+
+    "mdp": "Password",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete"
+}

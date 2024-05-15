@@ -1,0 +1,54 @@
+<ns-box data-title="mail.list.t1" title-icon="fa fa-envelope fa-lg" new-href="#/mails/new">
+    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
+        <table class="shortTable table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">
+                        <a ng-click="sortPlay.type = 'name'; sortPlay.reverse = !sortPlay.reverse" translate>
+                            mail.list.code
+                            <span ng-show="sortPlay.type == 'name' && !sortPlay.reverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortPlay.type == 'name' && sortPlay.reverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">
+                        <a ng-click="sortPlay.type = 'repeatInterval'; sortPlay.reverse = !sortPlay.reverse" translate>
+                            mail.list.sujet
+                            <span ng-show="sortPlay.type == 'repeatInterval' && !sortPlay.reverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortPlay.type == 'repeatInterval' && sortPlay.reverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">
+                        <a ng-click="sortPlay.type = 'nextRunAt'; sortPlay.reverse = !sortPlay.reverse" translate>
+                            mail.list.action
+                            <span ng-show="sortPlay.type == 'nextRunAt' && !sortPlay.reverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortPlay.type == 'nextRunAt' && sortPlay.reverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="text" ng-change="getAllMails(page)" ng-model="filter.code" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='mail.list.code' class="form-control">
+                    </th>
+                    <th>
+                        <input type="text" ng-change="getAllMails(page)" ng-model="filter.subject" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='mail.list.sujet' class="form-control">
+                    </th>
+                    <th>
+                        <select ng-model="filter.type" ng-change="getAllMails(page)" class="form-control" type="boolean">
+                            <option ng-repeat="option in mailTypes" value="{{option.code}}">{{option.translation[adminLang].name}}</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody role="alert" aria-live="polite" aria-relevant="all" infinite-scroll="scroller.next()" infinite-scroll-distance="1"
+                infinite-scroll-immediate-check="true" infinite-scroll-disabled='scroller.busy'>
+
+                <tr class="{{mail.data.flag == 'system' ? 'disabled disabledcolor pointer' : 'pointer' }}" ng-class-odd="'odd'" ng-class-even="'even'"
+                    ng-click="detail(mail)" ng-repeat="mail in mails|orderBy:sortPlay.type:sortPlay.reverse">
+                    <td data-label="Code :" class=" ">{{mail.code}}</td>
+                    <td data-label="Objet :" class=" ">{{mail.translation[defaultLang].subject}}</td>
+                    <td data-label="Action :" class=" ">{{getMailTypeDesc(mail.type)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ns-box>

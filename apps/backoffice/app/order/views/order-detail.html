@@ -1,0 +1,615 @@
+<ns-box data-title="order.detail.t1" title-icon="fa fa-shopping-cart fa-lg" close-href="#/orders" hook-order-detail-general>
+
+    <a class="btn btn-default ico" href="#/orders"><span translate>ns.ret</span><i class="fa fa-chevron-left"
+            aria-hidden="true"></i></a>
+    <a class="btn btn-default" style="float: right;" ng-show="displayBillButton()" ng-click="orderToBill()"
+        translate>order.detail.bill</a>
+
+    <div class="row start_stats orderInfoColor" style="margin: 30px auto;" hook-order-detail-head data="order">
+
+        <div class="col-md-2" style="background:#7986cb;border: 1px solid #5c6bc0;overflow: hidden">
+            <i class="fa fa-key" style="color: #5c6bc0"></i>
+            <p>
+                <b style="font-size: 25px;">{{order.number}}</b>
+                <br /><br />
+                <span translate>order.friendlyInfo.order</span>
+            </p>
+        </div>
+
+        <div class="col-md-2" style="background:#e57373;border: 1px solid #ef5350;overflow: hidden">
+            <i class="fa fa-calendar-o" style="color: #ef5350"></i>
+            <p>
+                <b style="font-size: 25px;">{{order.createdAt | date:'dd/MM/yyyy'}}</b>
+                <br />
+                <b style="font-size: 15px;">{{order.createdAt | date:'HH:mm'}}</b>
+                <br />
+                <span translate>order.friendlyInfo.date</span>
+            </p>
+        </div>
+
+        <div class="col-md-2" style="background:#a1887f;border: 1px solid #8f7f79;overflow: hidden">
+            <i class="fa fa-archive" style="color: #8f7f79"></i>
+            <p>
+                <b>{{calculateTotalQty(order.items)}}</b>
+                <br />
+                <span translate>order.friendlyInfo.productNumber</span>
+            </p>
+        </div>
+
+        <div class="col-md-2" style="background:#ffd54f;border: 1px solid #ffca28;overflow: hidden">
+            <i class="fa fa-usd" style="color: #ffca28"></i>
+            <p>
+                <b style="font-size: 30px;">{{order.priceTotal.ati | number:2}}</b><b class="euro">€</b>
+                <br />
+                <span>
+                    <br />Total
+                </span>
+            </p>
+        </div>
+
+        <div class="col-md-2"
+            style="background:#80cbc4;border: 1px solid #4db6ac;width:23%;cursor: pointer;overflow: hidden"
+            ng-click="scrollTo('changeStatusId')">
+            <i class="fa fa-bookmark" style="color: #4db6ac"></i>
+            <p>
+                <b style="font-size: 20px;">{{getStatus(order.status)}}</b>
+                <br />
+                <span translate>order.friendlyInfo.status</span>
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="row order-header order-emphase orderInfoOld" style="margin-bottom:25px;margin-top:25px;">
+        <div class="col-md-12">
+            <strong>{{order.number}} - {{order.createdAt | date:'dd/MM/yyyy HH:mm'}}
+            </strong>
+        </div>
+    </div>
+
+    <div class="row order-header order-emphase">
+        <div class="col-md-12">
+            <div style="margin-bottom: 5px" ng-repeat="field in fields" bind-html-compile="field.component_template">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 multipleBoxInLine">
+            <div class="box subbox" style="min-height: 256px;">
+                <div class="box-header">
+                    <h2 translate>order.detail.compteCli</h2>
+                    <a target="_blank" ng-href="#/clients/{{order.customer.id}}" class="caseOfIcon"
+                        ng-if="customer !== null">
+                        <i class="fa fa-2x fa-eye buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div class="box-content textInBox">
+                    <div ng-show="customer === null">
+                        <span style="font-weight: bold;color:red" translate>order.detail.messageUserDeleted</span>
+                        <br />
+                        <br />
+                    </div>
+                    <span>{{order.customer.fullname}}</span><br />
+                    {{order.customer.phone}}</span><br />
+                    <span>{{order.customer.email}}</span>
+                    <div ng-show="customer !== null && order.customer.email !== customer.email">
+                        <br />
+                        <span>(</span>
+                        <span translate>order.detail.messageEmail</span>:
+                        <span style="font-weight: bold;">{{customer.email}}</span>
+                        <span>)</span>
+                    </div>
+                    <div ng-if="order.comment">
+                        <br /><br />
+                        <b translate>order.detail.comments</b> : {{order.comment}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 multipleBoxInLine">
+            <div class="box subbox" style="min-height: 256px;">
+                <div class="box-header">
+                    <h2 translate>order.detail.billAdd</h2>
+                    <a ng-click="changeAddress('billing')" class="caseOfIcon">
+                        <i class="fa fa-2x fa-edit buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div ng-show="editableMode" class="box-content">
+                    <span editable-text="order.addresses.billing.firstname"
+                        onbeforesave="updateOrder('addresses.billing.firstname', $data)">{{
+                        order.addresses.billing.firstname || '&nbsp;' }}</span>
+                    <span editable-text="order.addresses.billing.lastname"
+                        onbeforesave="updateOrder('addresses.billing.lastname', $data)">{{
+                        order.addresses.billing.lastname || '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.companyName"
+                        onbeforesave="updateOrder('addresses.billing.companyName', $data)">{{
+                        order.addresses.billing.companyName || '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.line1"
+                        onbeforesave="updateOrder('addresses.billing.line1', $data)">{{ order.addresses.billing.line1 ||
+                        '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.line2"
+                        onbeforesave="updateOrder('addresses.billing.line2', $data)">{{ order.addresses.billing.line2 ||
+                        '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.phone"
+                        onbeforesave="updateOrder('addresses.billing.phone', $data)">{{ order.addresses.billing.phone ||
+                        '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.phone_mobile"
+                        onbeforesave="updateOrder('addresses.billing.phone_mobile', $data)">{{
+                        order.addresses.billing.phone_mobile || ' ' }}</span><br />
+                    <span editable-text="order.addresses.billing.zipcode"
+                        onbeforesave="updateOrder('addresses.billing.zipcode', $data)">{{
+                        order.addresses.billing.zipcode || '&nbsp;' }}</span>
+                    <span editable-text="order.addresses.billing.city"
+                        onbeforesave="updateOrder('addresses.billing.city', $data)">{{ order.addresses.billing.city ||
+                        '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.billing.country"
+                        onbeforesave="updateOrder('addresses.billing.country', $data)">{{
+                        order.addresses.billing.country || '&nbsp;' }}</span>
+                </div>
+                <div ng-hide="editableMode" class="box-content textInBox">
+                    <span translate>{{"order.detail.civility."+
+                        order.addresses.billing.civility.toString()}}</span><br />
+                    <span>
+                        {{order.addresses.billing.firstname}}&nbsp;{{order.addresses.billing.lastname}}<br />
+                        {{order.addresses.billing.companyName}}<br />
+                        {{order.addresses.billing.line1}}<br />
+                        {{order.addresses.billing.line2}}<br />
+                        {{order.addresses.billing.phone}}<br />
+                        {{order.addresses.billing.phone_mobile}}<br />
+                        {{order.addresses.billing.zipcode}}&nbsp;{{order.addresses.billing.city}}<br />
+                        {{order.addresses.billing.country}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box subbox" style="min-height: 256px;">
+                <div class="box-header">
+                    <h2 translate>order.detail.delivAdd</h2>
+                    <a ng-click="changeAddress('delivery')" class="caseOfIcon">
+                        <i class="fa fa-2x fa-edit buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div ng-show="editableMode" class="box-content">
+                    <span editable-text="order.addresses.delivery.firstname"
+                        onbeforesave="updateOrder('addresses.delivery.firstname', $data)">{{
+                        order.addresses.delivery.firstname || '&nbsp;' }}</span>
+                    <span editable-text="order.addresses.delivery.lastname"
+                        onbeforesave="updateOrder('addresses.delivery.lastname', $data)">
+                        {{ order.addresses.delivery.lastname || '&nbsp;' }}
+                    </span><br />
+                    <span editable-text="order.addresses.delivery.companyName"
+                        onbeforesave="updateOrder('addresses.delivery.companyName', $data)">
+                        {{order.delivery.name ? order.delivery.name + ": " + order.addresses.delivery.companyName :
+                        order.addresses.delivery.companyName || '&nbsp;'}}
+                    </span><br />
+                    <span editable-text="order.addresses.delivery.line1"
+                        onbeforesave="updateOrder('addresses.delivery.line1', $data)">{{ order.addresses.delivery.line1
+                        || '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.delivery.line2"
+                        onbeforesave="updateOrder('addresses.delivery.line2', $data)">{{ order.addresses.delivery.line2
+                        || '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.delivery.phone"
+                        onbeforesave="updateOrder('addresses.delivery.phone', $data)">{{ order.addresses.delivery.phone
+                        || ' ' }}</span><br />
+                    <span editable-text="order.addresses.delivery.phone_mobile"
+                        onbeforesave="updateOrder('addresses.delivery.phone_mobile', $data)">{{
+                        order.addresses.delivery.phone_mobile || ' ' }}</span><br />
+                    <span editable-text="order.addresses.delivery.zipcode"
+                        onbeforesave="updateOrder('addresses.delivery.zipcode', $data)">{{
+                        order.addresses.delivery.zipcode || '&nbsp;' }}</span>
+                    <span editable-text="order.addresses.delivery.city"
+                        onbeforesave="updateOrder('addresses.delivery.city', $data)">{{ order.addresses.delivery.city ||
+                        '&nbsp;' }}</span><br />
+                    <span editable-text="order.addresses.delivery.country"
+                        onbeforesave="updateOrder('addresses.delivery.country', $data)">{{
+                        order.addresses.delivery.country || '&nbsp;' }}</span>
+                </div>
+
+                <div class="box-content" style="padding: 0 10px;"
+                    ng-show="order.orderReceipt.method !== 'withdrawal' || (!fieldsOrderDelivery || fieldsOrderDelivery.length === 0)">
+                    {{order.addresses.delivery.companyName}}
+                    <span translate ng-show="order.addresses.delivery.firstname">{{"order.detail.civility."+
+                        order.addresses.delivery.civility.toString()}}</span><br />
+                    <span>
+                        {{order.addresses.delivery.firstname}}&nbsp;{{order.addresses.delivery.lastname}}<br />
+                        {{order.addresses.delivery.line1}}<br />
+                        {{order.addresses.delivery.line2}}<br />
+                        {{order.addresses.delivery.phone}}<br />
+                        {{order.addresses.delivery.phone_mobile}}<br />
+                        {{order.addresses.delivery.zipcode}}&nbsp;{{order.addresses.delivery.city}}<br />
+                        {{order.addresses.delivery.country}}
+                    </span>
+                </div>
+                <div class="box-content" ng-repeat="field in fieldsOrderDelivery"
+                    bind-html-compile="field.component_template"></div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-12" hook-order-detail-items>
+            <div class="box subbox" style="padding-bottom:0px;">
+                <div class="box-header box-header-table">
+                    <h2 translate>order.detail.orderDet</h2>
+                </div>
+                <div class="box-content" style="overflow: auto;">
+                    <table class="mediumTable table order-cart">
+                        <thead>
+                            <tr class="order-emphase">
+                                <td><strong translate>order.detail.refArt</strong></td>
+                                <td><strong translate>order.detail.descArt</strong></td>
+                                <td class="text-center"><strong translate>order.detail.qt</strong></td>
+                                <td class="text-center"><strong translate>order.detail.puHT</strong></td>
+                                <td class="text-center"><strong translate>order.detail.puTTC</strong></td>
+                                <td class="text-center"><strong translate>order.detail.tva</strong></td>
+                                <td class="text-right"><strong translate>order.detail.totalTTC</strong></td>
+                                <td class="text-center"><strong translate>order.detail.status</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in order.items">
+                                <td class="order-cart-img" data-label="Code :">
+                                    {{item.code}}
+                                </td>
+                                <td data-label="Description :">
+                                    <div class="details-box">
+                                        <div style="font-size: 20px" class="name">
+                                            <span style="font-size: 18px">{{item.name}}</span>
+                                            <span ng-show="item.parent"> - {{getParentItem(item.parent)}}</span>
+                                        </div>
+                                        <!--<div ng-if="item.atts.length > 0">Attributs : <p ng-repeat="(key, attr) in item.atts[0]">{{key}} : {{attr}}</p></div>-->
+                                        <div ng-if="item.opts.length > 0" translate>order.detail.opt
+                                            <p ng-repeat="opt in item.opts">{{opt[0]}}</p>
+                                        </div>
+                                        <div ng-show="item.id.trademark" class="trademark" translate>order.detail.marque
+                                        </div>
+                                        <ul ng-if="item.type === 'bundle'" style="list-style: none;"
+                                            ng-bind-html="displayProducts(item)"></ul>
+                                        <!--<a ng-href="#/products/{{(item.item_details.itemType ? item.item_details.itemType : 'simple')}}/{{item.item_details._slug}}" target="_blank" class="btn btn-default">Voir</a>-->
+                                    </div>
+                                </td>
+                                <td class="text-center order-text-big" data-label="Quantité :">
+                                    {{item.quantity}}
+                                </td>
+
+                                <td class="text-right order-text-big" data-label="Pu HT :">
+                                    {{getUnitPriceEt(item) | number:2}} €
+                                </td>
+                                <td class="text-right order-text-big" data-label="Pu TTC :">
+                                    <span ng-show="oldPrice(item)" class="old-price"><del><span>{{oldPrice(item) |
+                                                number:2}} €</span></del><br /></span>
+                                    {{getUnitPrice(item) | number:2}} €
+                                </td>
+                                <td class="text-right order-text-big" data-label="Montant TVA :">
+                                    {{getUnitPrice(item) - getUnitPriceEt(item) | number:2}} €
+                                </td>
+                                <td class="text-right order-text-big" data-label="Total TTC :">
+                                    <span ng-show="oldPrice(item)" class="old-price"><del><span>{{oldPrice(item) *
+                                                item.quantity | number:2}} €</span></del><br /></span>
+                                    {{getUnitPrice(item) * item.quantity | number:2}} €
+                                </td>
+                                <td class="text-center" data-label="Statut :">
+                                    {{itemStatus[item.status]}}
+                                </td>
+                            </tr>
+                            <tr ng-repeat="discount in order.discount">
+                                <td><strong>{{discount.code}}</strong></td>
+                                <td colspan="5">{{discount.comment}}</td>
+                                <td class="text-right order-text-big">{{-discount.price.ati | number:2}} €</td>
+                            </tr>
+                        </tbody>
+                        <tfoot style="border-top: 2px solid #576fa1;">
+                            <tr ng-if="order.delivery.method">
+                                <td style="width: 130px;"><strong translate>order.detail.fdp</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right order-text-big" data-label="Pu HT :">{{order.delivery.price.et |
+                                    number:2}}</td>
+                                <td class="text-right order-text-big" data-label="Pu TTC :">{{order.delivery.price.ati |
+                                    number:2}}</td>
+                                <td class="text-right order-text-big" data-label="TVA :">{{order.delivery.price.ati -
+                                    order.delivery.price.et | number:2}} €</td>
+                                <td class="text-right order-text-big" data-label="Total TTC :">
+                                    {{order.delivery.price.ati | number:2}} €</td>
+                                <td></td>
+                            </tr>
+                            <tr ng-if="order.quantityBreaks && order.quantityBreaks.discountATI">
+                                <td><strong translate>order.detail.cart_discount</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right order-emphase" data-label="Total TTC :">-
+                                    {{order.quantityBreaks.discountATI.aqlRound(2)}} €</td>
+                            </tr>
+                            <tr ng-if="order.promos[0]">
+                                <td><strong translate>order.detail.reduc</strong></td>
+                                <td class="text-left order-emphase">{{order.promos[0].name}}</td>
+                                <td></td>
+                                <td class="text-right order-emphase" data-label="Pu HT :">-
+                                    {{order.promos[0].discountET.aqlRound(2)}} €</td>
+                                <td class="text-right order-emphase" data-label="PU TTC :">-
+                                    {{order.promos[0].discountATI.aqlRound(2)}} €</td>
+                                <td class="text-right order-emphase" data-label="TVA :">- {{(order.promos[0].discountATI
+                                    - order.promos[0].discountET).aqlRound(2)}} €</td>
+                                <td class="text-right order-emphase" data-label="Total TTC :">-
+                                    {{order.promos[0].discountATI.aqlRound(2)}} €</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong translate>order.detail.total</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right order-emphase" data-label="Pu HT :">
+                                    {{order.priceTotal.et.aqlRound(2)}}€</td>
+                                <td class="text-right order-emphase" data-label="Pu TTC :">
+                                    {{order.priceTotal.ati.aqlRound(2)}}€</td>
+                                <td class="text-right order-emphase" data-label="TVA :">{{(order.priceTotal.ati -
+                                    order.priceTotal.et).aqlRound(2)}}€</td>
+                                <td class="text-right order-emphase" data-label="Total TTC :">
+                                    <strong>{{order.priceTotal.ati.aqlRound(2) }}€</strong></td>
+                                <td class="text-center">
+                                    <span ng-show="order.priceTotal.paidTax === undefined || order.priceTotal.paidTax"
+                                        translate>order.detail.paidTax</span>
+                                    <span ng-show="order.priceTotal.paidTax === false"
+                                        translate>order.detail.taxFree</span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-6 multipleBoxInLine">
+            <div class="box subbox" style="padding-bottom:0px;">
+                <div class="box-header box-header-table">
+                    <h2 translate>order.detail.colis</h2>
+                    <div ng-show="orderPackagePopup.length > 0" ng-repeat="orderPP in orderPackagePopup"
+                        bind-html-compile="orderPP.component_template">
+                    </div>
+                    <a ng-show="orderPackagePopup.length === 0" ng-click="addPackage()" class="caseOfIcon">
+                        <i class="fa fa-2x fa-plus buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div class="box-content" style="overflow:auto;">
+                    <div ng-show="order.delivery.package.length > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><strong translate>order.detail.nbPack</strong></td>
+                                    <td><strong translate>order.detail.datePack</strong></td>
+                                    <td><strong translate>order.detail.arts</strong></td>
+                                    <td><strong translate>order.detail.artTotal</strong></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="pkg in order.delivery.package">
+                                    <td><a ng-href="{{pkg.tracking}}" style="color:blue;text-decoration: underline;"
+                                            target="_blank" translate>order.detail.suivrePack</a></td>
+                                    <td>{{pkg.date | date:"dd/MM/yyyy"}}</td>
+                                    <td>{{getProductsDatas(pkg.products, "qty_shipped")}}</td>
+                                    <td>{{getPkgTotal(pkg)}}</td>
+                                    <td class="text-center"><i class="fa fa-trash pointer"
+                                            ng-click="delPkg(pkg._id)"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-hide="order.delivery.package.length > 0" class="textInBox" translate>
+                        order.detail.noPack
+                    </div>
+                    <!-- <div class="order-add-button">
+                        <button class="btn btn-default pull-right" ng-click="addPackage()" translate>order.detail.saisirPack</button>
+                        <div class="clearfix"></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box subbox" style="min-height: 185px;">
+                <div class="box-header">
+                    <h2 translate>order.detail.trans</h2>
+                </div>
+                <div class="box-content">
+                    <div ng-show="order.delivery">
+                        <table>
+                            <tbody class="box-content">
+                                <tr>
+                                    <td class="col-md-12">
+                                        <p
+                                            ng-show="order.orderReceipt.method !== 'withdrawal' || (!fieldsOrderDelivery || fieldsOrderDelivery.length === 0)">
+                                            <b translate>order.detail.trans</b> : {{order.delivery.name ?
+                                            order.delivery.name : "N/A"}}<br />
+                                            <b translate>order.detail.dateLivr</b> : {{order.orderReceipt ?
+                                            getOrderReceiptDate() : getDeliveryDate()}}
+                                        </p>
+                                        <p ng-repeat="orderDelDate in dateOrderDelivery"
+                                            bind-html-compile="orderDelDate.component_template"></p>
+
+                                        <p>
+                                            <b translate>order.detail.pdsTotal</b>
+                                            <span>:</span>
+                                            <span>{{getTotalWeight()}}</span>
+                                            <span>g</span>
+                                            <span ng-show="getTotalWeight() > 1000">({{getTotalWeight()/1000}}
+                                                kg)</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr style="margin-bottom: 5px" ng-repeat="orderRP in orderRelayPoint"
+                                    bind-html-compile="orderRP.component_template"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--<div ng-hide="order.addresses.delivery" translate>order.detail.noTrans</div>-->
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box subbox">
+                <div class="box-header box-header-table">
+                    <h2 translate>order.detail.reglRemb</h2>
+                    <a ng-click="addInfoPayment()" class="caseOfIcon">
+                        <i class="fa fa-2x fa-plus buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div class="box-content" style="overflow:auto;">
+                    <table class="mediumTable table">
+                        <thead>
+                            <tr>
+                                <td><strong translate>order.detail.type</strong></td>
+                                <td><strong translate>order.detail.transactionId</strong></td>
+                                <td><strong translate>order.detail.etat</strong></td>
+                                <td><strong translate>order.detail.comment</strong></td>
+                                <td><strong translate>order.detail.creeLe</strong></td>
+                                <td><strong translate>order.detail.date</strong></td>
+                                <td><strong translate>order.detail.mode</strong></td>
+                                <td><strong translate>order.detail.montant</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="payment in order.payment">
+                                <td data-label="Type :" translate>
+                                    {{payment.type | paymentType}}
+                                </td>
+                                <td data-label="ID :">
+                                    {{payment.transactionId}}
+                                </td>
+                                <td data-label="Etat :" translate>
+                                    {{payment.status | paymentStatus }}
+                                </td>
+                                <td data-label="Commentaire :">
+                                    {{payment.comment}}
+                                </td>
+                                <td data-label="Crée le :">
+                                    {{payment.creationDate | date:'dd/MM/yyyy HH:mm'}}
+                                </td>
+                                <td data-label="Date :">
+                                    {{payment.operationDate | date:'dd/MM/yyyy HH:mm'}}
+                                </td>
+                                <td data-label="Mode :">
+                                    {{payment.mode}}
+                                </td>
+                                <td data-label="Montant :">
+                                    {{payment.amount | number: 2}} €
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-6 multipleBoxInLine">
+            <div class="box subbox">
+                <div class="box-header box-header-table">
+                    <h2 translate>order.detail.retour</h2>
+                    <a ng-click="returnItem()" class="caseOfIcon">
+                        <i class="fa fa-2x fa-plus buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div class="box-content" style="overflow:auto;">
+                    <div ng-show="order.rma.length > 0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><strong translate>order.detail.art</strong></td>
+                                    <td><strong translate>order.detail.backDate</strong></td>
+                                    <td><strong translate>order.detail.comment</strong></td>
+                                    <td><strong translate>order.detail.entreeStock</strong></td>
+                                    <td><strong translate>order.detail.remb</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="backproduct in order.rma">
+                                    <td>
+                                        {{getProductsDatas(backproduct.products, "qty_returned")}}
+                                    </td>
+                                    <td>
+                                        {{backproduct.date | date:"dd/MM/yyyy"}}
+                                    </td>
+                                    <td>
+                                        {{backproduct.comment}}
+                                    </td>
+                                    <td>
+                                        {{backproduct.in_stock ? "Oui" : "Non"}}
+                                    </td>
+                                    <td class="text-right order-emphase">
+                                        {{backproduct.refund | number:2}} €
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-hide="order.rma.length > 0" class="textInBox" translate>
+                        order.detail.noRet
+                    </div>
+                    <!-- <div class="order-add-button">
+                        <button class="btn btn-default pull-right" ng-click="returnItem()" translate>order.detail.saisirRet</button>
+                        <div class="clearfix"></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box subbox">
+                <div class="box-header">
+                    <h2 translate id="changeStatusId">order.detail.status</h2>
+                    <!-- <label style="color:white;margin-right:10px;float:right">{{order.status | orderStatus}}</label> -->
+                    <a ng-click="changeStatus()" class="caseOfIcon">
+                        <i class="fa fa-2x fa-edit buttonIconStyle"></i>
+                    </a>
+                </div>
+                <div class="box-content textInBox">
+                    <div class="align-center">
+                        <div ng-show="editStatus">
+                            <div style="margin-bottom:10px">
+                                <strong><label translate="">order.detail.status </label> : </strong>
+                                <select style="width: 100%;display:inline-block" name="editStatus" id="editStatus"
+                                    class="form-control" ng-options="s.code as s.name for s in orderStatus"
+                                    ng-model="status">
+                                </select>
+                            </div>
+                            <div style="margin-bottom:10px">
+                                <button type="button" class="btn btn-default ng-scope"
+                                    ng-click="updateOrder('status', status)" translate>order.detail.save</button>
+                                <button type="button" class="btn btn-default ng-scope" ng-click="changeStatus()"
+                                    translate>order.detail.cancel</button>
+                            </div>
+                        </div>
+                        <p ng-repeat="status in order.historyStatus | orderBy:'-date'">
+                            {{status.date | date:"dd/MM/yyyy 'à' H:mm"}} ->
+                            <!-- {{status.status}} -->
+                            <!-- <label translate translate-values="test">order.detail.cancel</label> -->
+                            <label translate>{{getTranslation(status.status)}}</label>
+                            <!-- <b translate>{{getStatus(status.status)}} </b> -->
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" bind-html-compile="order.component_template"></div>
+
+</ns-box>

@@ -1,0 +1,58 @@
+<ns-box data-title="supplier.list.t1" title-icon="fa fa-industry fa-lg" new-href="#/suppliers/new">
+    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid" hook-supplier-list>
+        <table class="shortTable table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable"
+               id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+            <thead>
+            <tr role="row" style="cursor: pointer">
+                <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                    style="width: 200px;" aria-sort="ascending"
+                    aria-label="Username: activate to sort column descending">
+                    <a ng-click="sortType = 'name'; sortReverse = !sortReverse" translate>
+                        supplier.list.nom
+                        <span ng-show="sortType == 'name' && !sortReverse" class="ico-chevron-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="ico-chevron-up"></span>
+                    </a>
+                </th>
+                <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                    style="width: 200px;" aria-label="Date registered: activate to sort column ascending">
+                    <a ng-click="sortType = 'active'; sortReverse = !sortReverse" translate>
+                        supplier.list.etats
+                        <span ng-show="sortType == 'active' && !sortReverse" class="ico-chevron-down"></span>
+                        <span ng-show="sortType == 'active' && sortReverse" class="ico-chevron-up"></span>
+                    </a>
+                </th>
+                <!--<th role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                    style="width: 200px;" aria-label="Date registered: activate to sort column ascending">
+                    Actions
+                </th>-->
+            </tr>
+            <tr role="row" style="cursor: pointer">
+                <th>
+                    <input type="text" ng-change="onPageChange(page)" ng-model="filter.query" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='supplier.list.nom' class="form-control">
+                </th>
+                <th>
+                </th>
+            </tr>
+            </thead>
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+            <tr class="pointer"
+                ng-class-odd="'odd'" ng-class-even="'even'"
+                ng-click="goToSupplierDetails(supplier.code)"
+                ng-repeat="supplier in suppliers track by supplier.code | orderBy:sortType:sortReverse">
+                <td data-label="Nom :" class="  sorting_1">{{supplier.name}}</td>
+                <td data-label="Etat :" class=" ">
+                    <span ng-bind-html='supplier.active | checked'></span>
+                </td>
+                <!--<td class=" ">
+                    <a href="#/suppliers/{{supplier.code}}" class="btn btn-blue btn-with-icon">
+                        <i class="ico-magnifier-primary"></i>
+                        <span class="text">Consulter</span>
+                    </a>
+                </td>-->
+            </tr>
+            </tbody>
+        </table>
+        <pagination total-items="totalItems" page="page" on-select-page="onPageChange(page)" items-per-page="nbItemsPerPage" max-size="maxSize" boundary-links="true"
+                    rotate="false"></pagination>
+    </div>
+</ns-box>

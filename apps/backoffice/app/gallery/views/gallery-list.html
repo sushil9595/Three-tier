@@ -1,0 +1,26 @@
+<ns-box data-title="gallery.list.t1" title-icon="fa fa-picture-o fa-lg" new-href="#/component/gallery/new" hook-gallery-list>
+    <table class="shortTable table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable">
+        <thead>
+            <tr>
+                <th translate>gallery.list.code</th>
+                <th translate>gallery.list.img</th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="text" ng-change="getGallery()" ng-model="filter.code" value="" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='gallery.list.code' class="form-control">
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pointer"
+            ng-click="goToGalleryDetails(gallery._id)"
+            ng-repeat="gallery in galleries | orderBy:'code'">
+                <td data-label="Code :">{{gallery.code}}</td>
+                <td data-label="Images :">{{gallery.items.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ns-box>

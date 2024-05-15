@@ -1,0 +1,22 @@
+{
+    "t1": "Modifier administrateur",
+    "t2": "Créer un nouvel administrateur",
+    "t3": "Liste administrateurs",
+    "ph1": "Rechercher...",
+    
+    "prenom": "Prénom",
+    "prenom2": "Prenom",
+    "nom": "Nom",
+    "username": "Nom d'utilisateur",
+    "mail": "E-mail",
+    "cocher": "Accès à des fonctionnalités d'Aquila :",
+    "customer": "Fiche client",
+    "reset": "Réinitialiser",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+
+    "mdp": "Mot de passe",
+    "actions": "Actions",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+}

@@ -1,0 +1,15 @@
+{
+    "addPack": "Ajouter un colis",
+    "nbPack": "Numéro de colis",
+    "refArt": "Référence article",
+    "nomArt": "Nom article",
+    "qt": "Quantité",
+    "all": "Tout",
+    "part": "Partiel",
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "ret": "retournée",
+    "exp": "déjà expédiée",
+    "ord": "commandée",
+    "liv": "à livrer"
+}

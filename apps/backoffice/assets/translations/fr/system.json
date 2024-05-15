@@ -1,0 +1,52 @@
+{
+    "environment": {
+        "t1": "Système",
+        "security":{
+            "title" : "Securité",
+            "ssl": {
+                "ssl": "SSL",
+                "active": "Activé",
+                "cert": "certificat",
+                "key": "Clé privée"
+            },
+            "contentPolicy": {
+                "title": "Politique de contenu",
+                "delAndAdd": "Supprimer/ajouter",
+                "value": "Valeur",
+                "confirm":"Vous allez activer une politique de sécurité stricte pouvant entrainer des dysfonctionnements sur votre site. Pour accéder à du contenu externe, vous devez lister l'ensemble des domaines autorisés"
+            }
+        },
+        "log":{
+            "title": "Logs",
+            "titleMenu": "Logs et Erreurs",
+            "logTitle": "Aperçu des logs :",
+            "errorTitle": "Aperçu des Erreurs :",
+            "logFileTitle": "Lien du fichier des  logs :",
+            "errorFileTitle": "Lien du fichier des erreurs :",
+            "refreshLog": "Rafraichir les logs et les erreurs",
+            "seeMoreLogs": "Voir plus de logs",
+            "seeMoreErrors": "Voir plus d'erreurs",
+            "linesDisplayed": " lignes affichées"
+        },
+        "other":{
+            "title" : "Autres",
+            "connectionString": "Chaine de connexion",
+            "database": "Base de données",
+            "dlDBAnonymized": "Télécharger la base de données anonymisée",
+            "dlAllDocument": "Télécharger une sauvegarde des documents *",
+            "dlAllDocumentTitle": "Documents",
+            "dlAllDocumentInfo": "* Télécharge les documents suivants : produits, medias/galleries/carousel, documents",
+            "uploadAllDocument": "Envoyer les documents *",
+            "restartProgress": "Redémarrage en cours...",
+            "addDoc": "Ajout des documents effectué",
+            "takeTime": "Cela peut prendre du temps, merci de patienter ...",
+            "errorOccurred": "Une erreur est survenue",
+            "uploadAllDocumentInfo": "* Seul un .zip est accepté, et doit contenir les dossiers adequat (disponible lors du téléchargement). Aucune entrée dans la base de donnée n'est effectuée"
+        },
+        "searchSettings": {
+            "title": "Paramètres de recherche",
+            "findDoc": "Retrouvez la documentation sur ",
+            "keysWeight": "Poids des clés"
+        }
+    }
+}

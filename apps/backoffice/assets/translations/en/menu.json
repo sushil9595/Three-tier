@@ -1,0 +1,59 @@
+{
+    "transactions": "Transactions",
+    "commandes": "Orders",
+    "paiements": "Payments",
+    "factures": "Online bills",
+    "carts": "Carts",
+
+    "catalogue": "Catalog",
+    "produits": "Products",
+    "avis": "Reviews",
+    "marques": "Brands",
+    "fournisseurs": "Suppliers",
+    "familles": "Families",
+    "jeuxAttributs": "Attributes sets",
+    "attributs": "Attributes",
+    "options": "Options",
+    "picto": "Pictogramme",
+
+    "clients": "Customers",
+    "site": "Site",
+    "pages": "Pages",
+    "BlocsCMS": "CMS Blocks",
+    "categories": "Categories",
+    "medias": "Media",
+    "article": "Blog",
+
+    "galerie": "Gallery",
+    "carousel": "Carousel",
+    "agenda": "Agenda",
+
+    "promotion": "Discount",
+
+    "configuration": "Configuration",
+    "mails": "Mails",
+    "modesExpedition": "Shippings",
+    "territories": "Territories",
+    "langues": "Languages",
+    "modesPaiement": "Payment modes",
+    "frontSetting": "Store-front",
+    
+    "pointsVente": "Points of sale",
+    
+    "themes": "Themes",
+    "design": "Design",
+    "css": "CSS",
+    "translate": "Translation",
+
+    "settings": "Settings",
+    "environnement": "Server",
+    "stock&commandes": "Orders & stock",
+    "tachesPlanifiees": "Planned Tasks",
+    "system": "System",
+    "update": "Update",
+    "admin": "Administrators",
+
+    "modules": "Plugins",
+
+    "newsletter": "Newsletter"
+}

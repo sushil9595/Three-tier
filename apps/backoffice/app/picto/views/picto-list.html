@@ -1,0 +1,59 @@
+<ns-box data-title="picto.list.t1" title-icon="fa fa-gratipay fa-2x" new-href="#/picto/new" hook-picto-list>
+
+    <table class="shortTable table table-bordered">
+        <thead>
+            <tr>
+                <th translate>
+                    picto.list.img
+                </th>
+                <th translate>
+                    picto.list.code
+                </th>
+                <th width="40%" translate>
+                    picto.list.title
+                </th>
+                <th translate>
+                    picto.list.used
+                </th>
+                <th translate>
+                    picto.list.actif
+                </th>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <input type="text" ng-change="getPicto()" ng-model="filter.code" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='picto.list.code' class="form-control">
+                </th>
+                <th>
+                    <input type="text" ng-change="getPicto()" ng-model="filter.title" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='picto.list.title' class="form-control">
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="picto in pictos" style="cursor: pointer;" ng-click="detailsPicto(picto._id)" ng-show="pictos.length > 0">
+                <td data-label="IMG :">
+                    <img style="max-width: 100px;max-height:50px" ng-src="/medias/picto/{{picto.filename}}" ng-if="picto.filename !== ''" alt="{{picto.filename}}">
+                    <p ng-show="picto.filename === ''" translate>picto.list.noImg</p>
+                </td>
+                <td data-label="Code :">{{picto.code}}</td>
+                <td data-label="Titre :">{{picto.title}}</td>
+                <td data-label="Utilisé dans les filtres :">
+                    <ns-status-label type="picto" status="picto.usedInFilters"></ns-status-label>
+                </td>
+                <td data-label="Actif :">
+                    <ns-status-label type="picto" status="picto.enabled"></ns-status-label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <style>
+        table tr td {
+            vertical-align: middle !important;
+        }
+    </style>
+</ns-box>

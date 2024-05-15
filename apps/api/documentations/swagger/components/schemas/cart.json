@@ -1,0 +1,139 @@
+{
+    "cartSchema": {
+        "description": "",
+        "properties": {
+            "updated" : {"type": "string", "format": "date"},
+            "paidTax" : {"type": "boolean", "default": true},
+            "status"  : {"type": "string", "enum": ["IN_PROGRESS", "EXPIRING", "EXPIRED"], "default": "IN_PROGRESS", "index": true},
+            "createdAt" : {
+                "type": "string",
+                "format": "date"
+            },
+            "promos"  : {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "promoId"     : {"type": "ObjectId", "ref": "promo", "required": true},
+                        "promoCodeId" : {"type": "ObjectId", "required": true, "index": true, "description": "L'id d'un promo.codes[i].code"},
+                        "discountATI" : {"type": "number", "default": null},
+                        "discountET"  : {"type": "number", "default": null},
+                        "name"        : {"type": "string", "required": true},
+                        "description" : {"type": "string", "required": true},
+                        "code"        : {"type": "string", "required": true},
+                        "gifts"       : {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/itemSchema"
+                            }
+                        },
+                        "productsId"  : {
+                            "type": "array",
+                            "description": "Si des items sont dans ce tableau alors la promo s'appliquera a ces produits",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "productId"    : {"type": "ObjectId", "ref": "products", "required": true},
+                                    "discountATI"  : {"type": "number", "default": null, "description": "Chaque produit a une discount différente car son prix est différent"},
+                                    "discountET"   : {"type": "number", "default": null},
+                                    "basePriceET"  : {"type": "number", "default": null},
+                                    "basePriceATI" : {"type": "number", "default": null}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "customer" : {
+                "type": "object",
+                "properties": {
+                    "id"    : {"type": "ObjectId", "ref": "users", "index": true},
+                    "email" : {"type": "string", "index": true},
+                    "phone" : {"type": "string"}
+                }
+            },
+            "addresses" : {
+                "type": "object",
+                "properties": {
+                    "delivery" : {
+                        "$ref": "#/components/schemas/addressSchema"
+                    },
+                    "billing"  : {
+                        "$ref": "#/components/schemas/addressSchema"
+                    }
+                }
+            },
+            "comment"  : {"type": "string"},
+            "items"    : {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/itemSchema"
+                }
+            },
+            "discount" : {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "code"        : {"type": "string"},
+                        "type"        : {"type": "string", "enum": ["PERCENT", "PRICE", "FREE_DELIVERY"]},
+                        "value"       : {"type": "number"},
+                        "description" : {"type": "string"},
+                        "minimumATI"  : {"type": "number"},
+                        "onAllSite"   : {"type": "boolean"},
+                        "openDate"    : {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "closeDate"   : {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "priceATI"    : {"type": "number", "required": true}
+                    }
+                }
+            },
+            "delivery" : {
+                "type": "object",
+                "properties": {
+                    "method" : {"type": "ObjectId", "ref": "shipments"},
+                    "value"  : {
+                        "type": "object",
+                        "properties": {
+                            "ati" : {"type": "number", "default": 0},
+                            "et"  : {"type": "number", "default": 0},
+                            "vat" : {"type": "number", "default": 0}
+                        }
+                    },
+                    "freePriceLimit" : {"type": "number"},
+                    "code"           : {"type": "string"},
+                    "name"           : {"type": "string"},
+                    "url"            : {"type": "string"},
+                    "date"           : {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dateDelivery"   : {
+                        "type": "object",
+                        "properties": {
+                            "delayDelivery"    : {"type": "number"},
+                            "unitDelivery"     : {"type": "string"},
+                            "delayPreparation" : {"type": "number"},
+                            "unitPreparation"  : {"type": "string"}
+                        }
+                    }
+                }
+            },
+            "orderReceipt" : {
+                "type": "object",
+                "properties": {
+                    "method" : {"type": "string", "enum": ["delivery", "relaypoint", "withdrawal"], "default": "delivery"},
+                    "date"   : {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            }
+        }
+    }
+}

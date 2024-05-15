@@ -1,0 +1,119 @@
+{
+    "new": "New",
+
+    "save": "Save",
+    "saveQuit": "Save and quit",
+    "delete": "Delete",
+
+    "cmsBlocks": "CMS Blocks",
+    "add": "Add",
+    "title": "Title",
+    "content": "Content",
+
+    "depFile": "Drop your file here",
+
+    "depPic": "Drop your picture here",
+
+    "addr1": "Address 1",
+    "addr2": "Address 2",
+    "addr3": "Address 3",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "loading": "Loading, please wait...",
+    "pays": "Country",
+
+    "ret": "Back",
+
+    "si": "If",
+    "et": "all",
+    "ou": "one of",
+    "none": "none of",
+    "condition": " those conditions are respected:",
+    "selection": "For a selection of products with",
+    "cond": " those conditions:",
+    "fieldInput": "INPUT FIELD",
+    "comp": "COMPARED TO",
+    "value": "VALUE",
+
+    "switch": {
+        "yes": "Yes",
+        "no": "No"
+    },
+
+    "rule": {
+        "qty": "Amount not less than",
+        "type": "Type of discount",
+        "value": "Value"
+    },
+    "contains": "Contains",
+    "ncontains": "Doesn't contains",
+    "eq": "Equal to",
+    "neq": "Not equal to",
+    "startswith": "Starts with",
+    "endswith": "Finish with",
+    "gte": "Equal or bigger than",
+    "gt": "Bigger than",
+    "lte": "Smaller than",
+    "lt": "Equal or smaller than",
+    "list": {
+        "t1": "Newsletter",
+        "name": "Name",
+        "numberMail": "Number of email"
+    },
+    "details": {
+        "infos": "Details",
+        "name": "Name",
+        "linkedCustomers": "Subscribed customers",
+        "email": "Email",
+        "date": "Subrscribe date",
+        "didReceive": "Receive mails",
+        "download": "Download emails list",
+        "true": "Yes",
+        "false": "No"
+    },
+    "fields": {
+        "code": "Product : Code",
+        "qty": "Product : Quantity",
+        "createdAt": "Product : Creation date",
+        "visible": "Product : Visible",
+        "active": "Product : Active",
+        "price_ati_normal": "Product : ATI price",
+        "price_et_normal": "Product : ET price",
+        "price_et_special": "Product : ET special price",
+        "price_ati_special": "Product : ATI special price",
+        "type": "Product : Type",
+        "is_new": "Product : New",
+        "family": "Product : Family",
+        "subfamily": "Product : Subfamily",
+        "universe": "Product : Univers",
+        "_id": "Product : ID",
+        "trademark": "Product : Trademark",
+        "supplier_ref": "Product : Supplier",
+        "translation_name": "Product : Name ({{lang}})",
+        "translation_slug": "Product : Slug ({{lang}})",
+        "attr.translation": "Product : Attribut '{{attr}}' ({{lang}})",
+        "client__id": "Customer : ID",
+        "client_type": "Customer : Type",
+        "categorie_code": "Category : Code",
+        "panier_priceTotal_et": "Cart : ET price",
+        "panier_priceTotal_ati": "Cart : ATI price",
+        "categorie_translation_slug": "Category : Slug ({{lang}})",
+        "client_attr_translation": "Customer : Attribut '{{attr}}' ({{lang}})",
+        "pictos_code": "Pictogram"
+    },
+    "help": {
+        "products": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the products documentation.</a>",
+        "themes": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the themes documentation.</a>",
+        "staticPage": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the pages documentation.</a>",
+        "shipments": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the shipments documentation.</a>",
+        "cmsBlocks": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the block cms documentation.</a>",
+        "articles": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the blogs documentation.</a>",
+        "contacts": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the contacts documentation.</a>",
+        "medias": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the medias documentation.</a>",
+        "gallery": "<a target='_blank' href='{{url}}' style='cursor:pointer'>Click here to read the gallery documentation. </a>",
+        "trademarks":"Trademarks allow you to create brands pages, but also to create rules based on brands.",
+        "suppliers":"Suppliers allow you to create rules based on Suppliers.",
+        "families":"Universes, families and sub-families allow you to create rules based on this tree structure.",
+        "hide": "Hide"
+    }
+}

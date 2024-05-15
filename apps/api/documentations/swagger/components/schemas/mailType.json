@@ -1,0 +1,10 @@
+{
+    "mailTypeSchema": {
+        "description": "",
+        "properties": {
+            "code"          : {"type": "string"},
+            "position"      : {"type": "number", "default": 1},
+            "translation"   : {}
+        }
+    }
+}

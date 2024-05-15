@@ -1,0 +1,21 @@
+{
+    "modal": {
+        "add": "Ajouter",
+        "addImage": "Ajouter une image",
+        "maxSize": "Taille maximale :",
+        "width": "Largeur :",
+        "height": "Hauteur :",
+        "cancel": "Annuler",
+        "medias": "Médias",
+        "addLink": "Ajouter un lien",
+        "link": "Lien :",
+        "nameLink": "Nom du lien :",
+        "type": "Type :",
+        "addShortcode": "Ajouter un Shortcode",
+        "addMailVar": "Ajouter une variable de mail",
+        "noParameters": "Ce Shortcode ne contient pas de paramètres.",
+        "back": "Retour",
+        "ratio": "Garder le ratio original",
+        "relativeLink": "Lien relatif"
+    }
+}

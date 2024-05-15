@@ -1,0 +1,53 @@
+{
+  "name": "aquila-cms",
+  "version": "1.404.03",
+  "description": "CMS e-commerce",
+  "main": "server.js",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/themes",
+    "apps/modules"
+  ],
+  "license": "OSL-3.0",
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:AquilaCMS/AquilaCMS.git"
+  },
+  "scripts": {
+    "start": "node apps/api/index.js",
+    "start:pm2": "pm2-runtime start ecosystem.config.js",
+    "start:container": "pm2 start ecosystem.config.js --env production && pm2 logs",
+    "start:dev": "pm2-dev start ecosystem.config.js",
+    "start:aws": "yarn install && yarn cache clean && pm2-runtime start apps/api/index.js --env production",
+    "aqstart": "yarn install && yarn cache clean && pm2-runtime start apps/api/index.js --env production",
+    "reload": "pm2 reload ecosystem.config.js --update-env && pm2 restart server && pm2 log server",
+    "lint:check": "eslint --ext js,jsx .",
+    "lint:fix": "eslint --fix --ext js,jsx .",
+    "test": "mocha --exit",
+    "coverage": "nyc npm run test",
+    "husky:install": "husky install"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "chai-like": "^1.1.1",
+    "chai-things": "^0.2.0",
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-align-assignments": "^1.1.2",
+    "eslint-plugin-angular": "^4.0.1",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-import": "^2.27.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0"
+  },
+  "lint-staged": {
+    "*.{ts,js,jsx,tsx}": "eslint --fix"
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "list": {
+        "t1": "Tâches planifiées",
+        "nom": "Nom",
+        "commentaire": "Commentaire",
+        "fq": "Fréquence",
+        "nextExec": "Prochaine Exécution",
+        "lastExec": "Dernière Exécution",
+        "paused": "En pause",
+        "isImportant": "Important"
+    },
+    "detail": {
+        "t1": "Détail tâche planifiée",
+        "alert": "Attention, vous allez modifier une tâche planifiée système !",
+        "taskName": "Nom de tâche*",
+        "fieldRequired": "Ce champ est requis.",
+        "commentaire": "Commentaire*",
+        "lancerAPI": "Tache à lancer*",
+        "fq": "Fréquence*",
+        "invalidFq": "Format de fréquence invalide",
+        "httpMeth": "Type",
+        "get": "GET",
+        "post": "POST",
+        "ftp": "FTP",
+        "function": "Fonction",
+        "startStop": "Lancer/Arrêter la tâche",
+        "startNow": "Lancer Immédiatement",
+        "lastRes": "Dernier résultat de la tâche planifiée",
+        "fqDoc": "Documentation fréquence",
+        "params": "Paramètres",
+        "cronSuccess": "Tâche planifiée exécutée avec succès",
+        "onMainThread": "Éxecuter sur le thread principal",
+        "yes": "Oui",
+        "no": "Non",
+        "infoInvalid": "Les informations saisies ne sont pas valides.",
+        "infoInvalidFrequency": "La fréquence est invalide, le cron ne peut être lancé à moins de 30 secondes d'intervalle.",
+        "cronSaved": "Tâche planifiée sauvegardée !",
+        "errorDeleteCron": "Impossible de supprimer une Tâche planifiée système",
+        "cronDelete": "Tâche planifiée supprimée",
+        "errorUnknown": "Une erreur inconnue s'est produite",
+        "errFailReason": "La tâche planifiée à une erreur :"
+    }
+}

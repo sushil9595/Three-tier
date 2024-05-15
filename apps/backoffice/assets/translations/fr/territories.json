@@ -1,0 +1,18 @@
+{
+    "listing": {
+        "t1": "Territoires",
+        "name": "Nom",
+        "code": "Code",
+        "children" : "Enfants",
+        "type" : "Type",
+        "havetaxes": "Assujetti TVA",
+        "delete": "Supprimer",
+        "info" : "Seul les pays peuvent être ajouté",
+        "country" : "Pays"
+    },
+    "details" : {
+        "t1":"Territoires details",
+        "territoryDelete": "Territoire supprimé",
+        "taxeFree" : "Exonéré de taxes"
+    }
+}

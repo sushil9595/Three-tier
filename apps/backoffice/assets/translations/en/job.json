@@ -1,0 +1,43 @@
+{
+    "list": {
+        "t1": "Planned Tasks",
+        "nom": "Name",
+        "commentaire": "Comment",
+        "fq": "Frequency",
+        "nextExec": "Next run",
+        "lastExec": "Last run",
+        "paused": "Paused",
+        "isImportant": "Important"
+    },
+    "detail": {
+        "t1": "Planned Task Detail",
+        "alert": "Watch out, you will edit a system planned task!",
+        "taskName": "Task name*",
+        "fieldRequired": "This field is required.",
+        "commentaire": "Comment*",
+        "lancerAPI": "Task to run*",
+        "fq": "Frequency*",
+        "invalidFq": "Invalid frequency format",
+        "httpMeth": "Type",
+        "get": "GET",
+        "post": "POST",
+        "ftp": "FTP",
+        "function": "Function",
+        "startStop": "Start/Stop Task",
+        "startNow": "Start Now",
+        "lastRes": "Last planned task result",
+        "fqDoc": "Frequency documentation",
+        "params": "Parameters",
+        "cronSuccess": "Scheduled task executed successfully",
+        "onMainThread": "Run on main thread",
+        "yes": "Yes",
+        "no": "No",
+        "infoInvalid": "The information entered is not valid.",
+        "infoInvalidFrequency": "The frequency is invalid, the cron cannot be launched less than 30 seconds apart.",
+        "cronSaved": "Scheduled task saved!",
+        "errorDeleteCron": "Cannot delete a System Scheduled Task",
+        "cronDelete": "Scheduled task deleted",
+        "errorUnknown": "An unknown error has occurred",
+        "errFailReason": "The planned task has an error:"
+    }
+}

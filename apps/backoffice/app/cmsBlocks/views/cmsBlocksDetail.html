@@ -1,0 +1,109 @@
+<ns-box data-title="cmsBlocks.detail.t1" title-icon="fa fa-file-code-o fa-lg" close-href="#/cmsBlocks">
+    <form name="form" class="form-horizontal"  ng-submit="save(false)" role="form">
+        <ns-buttons show-duplicate="true"
+                    is-edit-mode="isEditMode"
+                    return-path="/cmsBlocks"
+                    remove="delete()"
+                    hide-remove="cmsBlock.code === 'invoice'"
+                    save-and-quit="save(true)"
+                    disable-save="disableSave"
+                    form="form">
+            <div class="col-sm-12">
+                <ns-translation ng-model="lang" class="pull-right"></ns-translation>
+            </div>
+            <br><br>
+            <div class="form-group">
+                
+                <div class="col-sm-12">
+                    <label class="col-sm-2 control-label" translate>cmsBlocks.detail.code</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="code" class="form-control" ng-model="cmsBlock.code" ng-disabled="cmsBlock.code === 'invoice'" required />
+                        <div ng-messages="form.id.$error" role="alert">
+                            <div ng-message="required" ng-show="form.id.$dirty" translate>cmsBlocks.detail.champRequis</div>
+                        </div>
+                        <div class="label label-info">&lt;ns-cms ns-code="{{cmsBlock.code}}"&gt;&lt;/ns-cms&gt;</ns-cms></div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="_type === 'products'">
+                    <label class="col-sm-3 control-label" translate>attribute.detail.dispoCatAuto</label>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-sm-2 control-label" translate>product.general.actif</label>
+                <div class="col-sm-10">
+                    <ns-switch name="active" ng-model="cmsBlock.active"></ns-switch>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-2 control-label" translate>cmsBlocks.detail.desc</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="description" class="form-control" ng-model="cmsBlock.translation[lang].description"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-2 control-label" translate>cmsBlocks.detail.group</label>
+                    <div class="col-sm-10">
+                        <input-dropdown input-name="group" input-class-name="form-control"
+                            filter-list-method="filterDropdown(userInput)" selected-item="selectedDropdownItem"
+                            default-dropdown-items="groups" allow-custom-input="true"
+                            item-selected-method="itemObjectSelected(item)">
+                        </input-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12" hook-cmsblock-detail data="cmsBlock">
+                </div>
+            </div>
+
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 scrollmenu">
+                <ul class="nav nav-tabs" >
+                    <li class="active" ng-click="generateContent();selectTab('result')"><a data-toggle="tab" href="#result" target="_self" translate>cmsBlocks.detail.result</a></li>
+                    <li ng-click="generateVariables();selectTab('variables')" ng-if="cmsBlock.code !== 'invoice'"><a data-toggle="tab" href="#variables" target="_self" translate>cmsBlocks.detail.variables</a></li>
+                    <li ng-show="userIsAllowedTo('editHtml')"><a ng-click="selectTab('html')" data-toggle="tab" href="#html" target="_self" translate>cmsBlocks.detail.html</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 tab-content">
+                <div id="result" class="tab-pane fade in active">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div style="background-color: white; padding: 20px; border-radius: 10px;min-height:200px;height:auto;" ng-bind-html="cmsBlock.translation[lang].content" class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="variables" class="tab-pane">
+                    <div ng-repeat="var in cmsBlock.translation[lang].variables">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label" style="max-width: 150px;padding-left:10px;text-align: left;display:inline;">{{var.label}}</label>
+                                <textarea rows="1" class="form-control" ng-model="var.value"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="!cmsBlock.translation || cmsBlock.translation[lang].variables.length === 0">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label" translate>cmsBlocks.detail.noVars</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  id="html" class="tab-pane" ng-show="userIsAllowedTo('editHtml')">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <ns-tinymce ng-if="selectedTab.active == 'html'" lang="lang" text="cmsBlock.translation[lang].html"></ns-tinymce>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ns-buttons>
+    </form>
+</ns-box>

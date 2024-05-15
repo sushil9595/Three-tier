@@ -1,0 +1,59 @@
+{
+    "transactions": "Transactions",
+    "commandes": "Commandes",
+    "paiements": "Paiements",
+    "factures": "Factures en ligne",
+    "carts": "Paniers",
+
+    "catalogue": "Catalogue",
+    "produits": "Produits",
+    "avis": "Avis",
+    "marques": "Marques",
+    "fournisseurs": "Fournisseurs",
+    "familles": "Familles",
+    "jeuxAttributs": "Jeux d'Attributs",
+    "attributs": "Attributs",
+    "options": "Options",
+    "picto": "Pictogramme",
+
+    "clients": "Clients",
+    "site": "Site",
+    "pages": "Pages",
+    "BlocsCMS": "Blocs CMS",
+    "categories": "Catégories",
+    "medias": "Medias",
+    "article": "Blog",
+
+    "galerie": "Galerie",
+    "carousel": "Carrousel",
+    "agenda": "Agenda",
+
+    "promotion": "Promotion",
+
+    "configuration": "Configuration",
+    "mails": "Mails",
+    "modesExpedition": "Transporteurs",
+    "territories": "Territoires",
+    "langues": "Langues",
+    "modesPaiement": "Modes paiement",
+    "frontSetting": "Boutique",
+
+    "pointsVente": "Points de vente",
+
+    "themes": "Thèmes",
+    "design": "Apparence",
+    "css": "CSS",
+    "translate": "Traduction",
+
+    "settings": "Paramètrages",
+    "environnement": "Serveur",
+    "stock&commandes": "Commande",
+    "tachesPlanifiees": "Tâches Planifiées",
+    "system": "Système",
+    "update": "Mise à jour",
+    "admin": "Administrateurs",
+
+    "modules": "Modules",
+
+    "newsletter": "Newsletter"
+}

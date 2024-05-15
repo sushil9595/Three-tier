@@ -1,0 +1,186 @@
+<h3 translate>product.general.infoGen</h3>
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="code" class="col-sm-2 control-label" translate>product.general.code</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="code" name="code" ng-model="product.code" ng-disabled="isEditMode">
+            <div class="ns-error-message">
+                <div ng-show="(form.code.$dirty || form.nsSubmitted) && form.code.$error.required" translate>product.general.fieldReq</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="type" class="col-sm-2 control-label" translate>product.general.type</label>
+        <div class="col-sm-10">
+            <select name="type" class="form-control" ng-model="product.type" ng-change="changeType()">
+                <option ng-disabled="product.type === 'simple'" value="simple" translate>category.detail.simple</option>
+                <option ng-disabled="product.type === 'bundle'" value="bundle" translate>category.detail.compose</option>
+                <option ng-disabled="product.type === 'virtual'" value="virtual" translate>category.detail.virtual</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="name" class="col-sm-2 control-label" translate>product.general.nom</label>
+
+        <!-- Tricks for display the tooltip for the product.general.type -->
+        <i style="float:left;margin-left: -10px;margin-top: -45px" class="fa fa-question-circle" popover="{{'product.general.typeTooltip' | translate}}" popover-trigger="mouseenter" aria-hidden="true"></i>
+        <!-- End Tricks -->
+
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" ng-model="product.translation[lang].name" required>
+            <div class="ns-error-message">
+                <div ng-show="(form.name.$dirty || form.nsSubmitted) && form.name.$error.required" translate>product.general.fieldReq</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="slug" class="col-sm-2 control-label" translate>product.general.slug</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="slug" name="slug" ng-model="product.translation[lang].slug">
+            <div>
+                <small><i translate>product.general.autoGen</i></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="canonical" class="col-sm-2 control-label" translate>product.general.canon</label>
+        <div class="col-sm-10">
+            <input style="float:left" type="text" class="form-control" id="canonical" name="canonical" ng-model="product.translation[lang].canonical" disabled="disabled">
+            <a ng-if="product.translation[lang].canonical" style="float:left;margin-left:-30px;padding-top:5px" target="_blank" href="{{product.translation[lang].canonical}}"><i class="fa fa-eye"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="form-group" ng-show="product.type === 'virtual'">
+    <div class="col-sm-11">
+        <label for="downloadLink" class="col-sm-2 control-label" translate>product.general.downloadLink</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="downloadLink" name="downloadLink" ng-model="product.downloadLink" ng-model-options="{debounce: 500}" ng-change="downloadLinkChange()">
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-show="product.type === 'virtual'">
+    <div class="col-sm-11">
+        <label for="filename" class="col-sm-2 control-label" translate>product.general.filename</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="filename" name="filename" ng-model="product.filename">
+        </div>
+    </div>
+</div>
+
+<div class="form-group" ng-show="product.type === 'virtual'">
+    <div class="col-sm-11">
+        <label for="downloadInfos" class="col-sm-2 control-label" translate>product.general.downloadInfos</label>
+        <div class="col-sm-6">
+            <textarea type="text" class="form-control" id="downloadInfos" name="downloadInfos" ng-model="product.downloadInfos" rows="5"></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div ng-if="isEditMode && isGoodCanonical()" class="col-sm-11">
+            <label for="active" class="col-sm-2 control-label" translate>product.general.actif</label>
+            <div class="col-sm-2">
+                <ns-switch id="active" ng-model="product.active" name="active"></ns-switch>
+            </div>
+
+            <label for="visible" class="col-sm-2 control-label" translate>product.general.visible</label>
+            <div class="col-sm-2">
+                <ns-switch id="visible" ng-model="product._visible" name="visible"></ns-switch>
+            </div>
+
+            <div bind-html-compile="product.component_template"></div>
+    </div>
+
+    <div ng-if="isEditMode && !isGoodCanonical()" class="col-sm-11">
+        <label for="active" class="col-sm-2 control-label" translate>product.general.actifVisible</label>
+        <div class="col-sm-2">
+            <div ng-click="changeActiveVisible(product)">
+                
+                <ul class="list-radios">
+                    <li>
+                        <div class="radio">
+                            <input disabled type="radio" class="switch-radio" ng-value="true" ng-init="disableActifVisible=false"
+                                ng-model="disableActifVisible">
+                            <label class="form-label">Oui</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="radio">
+                            <input disabled type="radio" class="switch-radio" ng-value="false" ng-init="disableActifVisible=false"
+                                ng-model="disableActifVisible">
+                            <label class="form-label">Non</label>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    
+    
+        <div bind-html-compile="product.component_template"></div>
+    </div>
+
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="slug" class="col-sm-2 control-label" translate>product.general.metaDesc</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="metadesc" name="metadesc"
+                ng-model="product.translation[lang].metaDesc">
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="description2.title" class="col-sm-2 control-label" translate>product.general.titleDescCt</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="description2.title" name="description2.title" ng-model="product.translation[lang].description2.title">
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="description2.title" class="col-sm-2 control-label" translate>product.general.descCt</label>
+        <div class="col-sm-10 tinyeditor-small">
+            <ns-tinymce shortcode="false" lang="lang" text="product.translation[lang].description2.text"></ns-tinymce>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="description1.title" class="col-sm-2 control-label" translate>product.general.titleDescLg</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="description1.title" name="description1.title" ng-model="product.translation[lang].description1.title">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-11">
+        <label for="description1.title" class="col-sm-2 control-label" translate>product.general.descLg</label>
+        <div class="col-sm-10 tinyeditor-big">
+            <ns-tinymce shortcode="false" lang="lang" text="product.translation[lang].description1.text"></ns-tinymce>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-11" hook-product-detail-general data="product">
+    </div>
+</div>

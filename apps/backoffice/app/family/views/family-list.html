@@ -1,0 +1,146 @@
+<ns-box data-title="family.list.t1" title-icon="fa fa-shopping-bag fa-lg" new-click="newFamilies('universe')">
+    <style>
+        .littleBlueButton{
+            height: 24px;
+            margin-top: 5px;
+            line-height: initial;
+            padding: 0px 5px;
+            font-size: 16px;
+            min-width: 0;
+            margin-right:1px;
+        }
+        .littleBlueButtonArrow{
+            background: #576fa1;
+            border-color: #576fa1;
+            color: #ffffff;
+            line-height: initial;
+            height: 20px;
+            padding: 1px 5px;
+            font-size: 12px;
+            min-width: 0;
+            vertical-align: middle;
+            text-align: center;
+            border-radius: 2px;
+        }
+        .littleBlueButtonArrow:hover{
+            color: #333;
+            text-decoration: none;
+        }
+        a:hover{
+            color: #333;
+            text-decoration: none;
+        }
+        .titleTree{
+            color: #7c9eb2;
+            min-height: 32px !important;
+            line-height: 32px !important;
+            font-weight: 700;
+        }
+        .barre{
+            margin-top: 3px;
+            background-color: #ffffff;
+        }
+        .decalage{
+            margin-left:28px;
+        }
+        .label{
+            margin-left:3px;
+        }
+        .list-group-item{
+            padding:0px;
+        }
+    </style>
+    <div class="row">
+        <div class="col-lg-10">
+            <ul ui-sortable="sortableUniverses" class="list-group custom-listgroup-linked" ng-model="universes">
+                <li ng-repeat="universe in universes">
+                    <div class="barre list-group-item" ng-class="{ 'active': universe._id == selectedUniverse, 'droppable': universe.children.length, 'dropped': (universe._id == selectedFamily && universe.children.length)}"  style="cursor:pointer;">
+                        <div class="row" ng-click="updateFromUnivers(universe._id);">
+                            <div class="col-md-9">
+                                <span ng-show="universe.children.length" class="littleBlueButtonArrow">
+                                    <a href="">
+                                        <span class="glyphicon glyphicon-chevron-right"
+                                            ng-class="universe._id == selectedUniverse ? 'glyphicon-chevron-down': 'glyphicon-chevron-right' "></span>
+                                    </a>
+                                </span>
+                                <span class="label label-info">Univers</span>
+                                <span ng-class="universe.children.length ? decalage : ''">
+                                    <span class="titleTree">{{universe.name}}</span>
+                                    <span class="titleTree">Univers</span>
+                                </span>
+                            
+                            </div>
+                            <div class="col-md-3">
+                                <span class="btn btn-primary littleBlueButton pull-right">
+                                    <a href=""  ng-click="updateFromUnivers(universe._id); editFamilies(universe._id, 'universe');">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </span>
+                                <span class="btn btn-primary littleBlueButton pull-right"">
+                                    <a href=""  ng-click="updateFromUnivers(universe._id); removeFamily(universe._id);">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </span>
+                                <span class="btn btn-primary littleBlueButton pull-right">
+                                    <a href="" ng-click="newFamilies('family',universe._id)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                    <div ng-hide="selectedUniverse != universe._id">
+                        <ul ui-sortable="sortableFamilies" class="list-group custom-listgroup-linked" style="padding-left: 20px;" ng-model="families">
+                            <li ng-if="selectedUniverse == universe._id" ng-repeat="family in families">
+                                <div class="list-group-item barre" ng-class="{ 'active': family._id == selectedFamily, 'droppable': family.children.length, 'dropped': (family._id == selectedFamily && family.children.length)}"  style="cursor:pointer">
+                                    <div class="row">
+                                        <div class="col-md-9" ng-click="updateFromFamily(family._id)">
+                                            <span ng-show="family.children.length" class="littleBlueButtonArrow">
+                                                <a href=""><span class="glyphicon glyphicon-chevron-right"
+                                                        ng-class="selectedFamily == family._id ? 'glyphicon-chevron-down': 'glyphicon-chevron-right' "></span></a>
+                                            </span>
+                                            <span ng-class="!family.children.length ? decalage : ''">
+                                                <span class="label label-info">Famille</span>
+                                                <span class="titleTree">{{family.name}}</span>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span class="btn btn-primary littleBlueButton pull-right">
+                                                <a href="" ng-click="editFamilies(family._id, 'family'); "><span
+                                                    class="glyphicon glyphicon-pencil"></span></a>
+                                            </span>
+                                            <span class="btn btn-primary littleBlueButton pull-right">
+                                                <a href="" ng-click="removeFamily(family._id);"><span
+                                                        class="glyphicon glyphicon-trash"></span></a>
+                                            </span>
+                                            <span class="btn btn-primary littleBlueButton pull-right">
+                                                <a href="" ng-click="newFamilies('subfamily',family._id)"><span
+                                                        class="glyphicon glyphicon-plus"></span></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-hide="selectedFamily != family._id">
+                                    <ul ui-sortable="sortableSubFamilies" class="list-group custom-listgroup-linked" style="padding-left: 20px;" ng-model="subFamilies">
+                                        <li class="barre list-group-item" ng-if="selectedFamily == family._id" ng-repeat="subFamily in subFamilies" ng-click="updateFromSubFamily(subFamily._id)" style="cursor:pointer">
+                                            <span class="label label-info">Sous famille</span>
+                                            <span class="titleTree">{{subFamily.name}}</span>
+                                            <span class="btn btn-primary littleBlueButton pull-right">
+                                                <a href="" ng-click="editFamilies(subFamily._id, 'subFamily');"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            </span>
+                                            <span class="btn btn-primary littleBlueButton pull-right">
+                                                <a href="" ng-click="removeFamily(subFamily._id);"><span class="glyphicon glyphicon-trash"></span></a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+</ns-box>

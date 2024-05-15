@@ -1,0 +1,50 @@
+{
+    "t1": "Product Detail",
+    "new": {
+        "addSection": "Add section",
+        "ref": "Section code",
+        "type": "Type",
+        "cancel": "Cancel",
+        "valider": "Submit"
+    },
+    "product": {
+        "inputCode": "Enter the new product code :",
+        "gen": "General",
+        "mark": "Marketing",
+        "compo": "Composition",
+        "price": "Price & Stock",
+        "pics": "Pictures",
+        "cs": "Cross Selling",
+        "promos": "Promos",
+        "specAttr": "Specific attibutes",
+        "linkedCat": "Linked categories",
+        "addSec": "Add section",
+        "delSec": "Delete section",
+        "ref": "Section code",
+        "type": "Type",
+        "title": "Title",
+        "displayMode": "Display mode",
+        "requis": "Is required",
+        "minSel": "Min selections",
+        "maxSel": "Max selections",
+        "addPdt": "Add product",
+        "pdt": "Product",
+        "picture": "Picture",
+        "act": "Actions",
+        "qt": "Quantity",
+        "attrJeux": "Attributes set attributes",
+        "idFirst": "You must type the product's ID before configuring attributes!",
+        "catNom": "Category name",
+        "modifierPrice": {
+            "ati": "ATI price diff",
+            "et": "ET price diff"
+        },
+        "productSaved": "Saved product",
+        "errorDeleting": "An error occurred while deleting.",
+        "errorSaving": "An error occurred while saving.",
+        "modifierWeight": "Weight diff (gram)"
+    },
+    "msg": {
+        "deleteSelection": "Are you sure you want to delete the section ?"
+    }
+}

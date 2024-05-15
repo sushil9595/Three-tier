@@ -1,0 +1,12 @@
+{
+    "adminInformationSchema": {
+        "description": "",
+        "properties": {
+            "code"        : {"type": "string"},
+            "type"        : {"type": "string", "enum": ["success", "info", "warning", "danger"]},
+            "translation" : {"type": "object"},
+            "date"        : {"type": "string", "format": "date"},
+            "deleted"     : {"type": "boolean"}
+        }
+    }
+}

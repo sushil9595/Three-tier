@@ -1,0 +1,101 @@
+<style>
+    .loader {
+        border: 10px solid #f3f3f3; /* Light grey */
+        border-top: 10px solid #576fa1;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 2s linear infinite;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<ns-box data-title="modules.t1" title-icon="fa fa-plug fa-lg" ng-show="!showLoading" new-click="addPlugin()">  
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="installModulesDeps()" translate>global.installDeps</button>
+    </div> 
+    <br/>
+    <div class="tableWrapperOverflow">
+        <table class="shortTable table table-striped table-bordered">
+            <thead>
+                <tr style="cursor: pointer">
+                    <th style="width: 200px;" translate>
+                        modules.nom
+                    </th>
+                    <th translate>
+                        modules.desc
+                    </th>
+                    <th translate>
+                        modules.ver
+                    </th>
+                    <th translate>
+                        modules.actif
+                    </th>
+                    <th translate>
+                        modules.actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="module in modules">
+                    <td data-label="Nom :" >
+                        {{module.name}}
+                    </td>
+                    <td data-label="Description :" >
+                        {{module.description}}
+                    </td>
+                    <td data-label="Version :" >
+                        {{module.version}}
+                    </td>
+                    <td>
+                        <ul class="list-radios">
+                            <li>
+                                <div class="radio">
+                                    <input id="{{module._id}}_module_on" type="radio" class="switch-radio" name="{{module._id}}_active" ng-value="true" ng-model="module.active" ng-change="toggleActive(module._id, module.name, module.active)">
+                                    <label class="form-label" for="{{module._id}}_module_on" translate>modules.activate</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="radio">
+                                    <input id="{{module._id}}_module_off" type="radio" class="switch-radio" name="{{module._id}}_active" ng-value="false" ng-model="module.active" ng-change="toggleActive(module._id, module.name, module.active)">
+                                    <label class="form-label" for="{{module._id}}_module_off" translate>modules.deactivate</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                    <td data-label="Action :" >
+                        <a href="#/{{module.url}}" class="btn btn-blue btn-with-icon" style="margin-top:0px;margin-bottom:10px;" ng-disabled="!module.active || !module.url">
+                            <i class="ico-magnifier-primary"></i>
+                            <span class="text" translate>modules.config</span>
+                        </a>
+                        <a href="" ng-click="remove(module._id, module.name, module.active)" style="margin-top:0px;margin-bottom:10px;" class="btn btn-red btn-with-icon" ng-disabled="module.active">
+                            <i class="ico-trash"></i>
+                            <span class="text" translate>modules.delete</span>
+                        </a>
+                        <span class="btn btn-with-icon" style="border:1px solid black;margin-top:0px;margin-bottom:10px;" ng-click="displayReadMe(module.name)">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <span class="text" style="color: black" translate>modules.info</span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ns-box>
+
+<ns-box data-title="modules.t1" title-icon="css/images/ico-cogwheel-large.png" ng-show="showLoading">
+    <div style="text-align: center;">
+        <h1>{{message}}</h1>
+        <br />
+        <div class="loader"></div>
+    </div>
+</ns-box>
+
+<div ng-show="showModuleLoading" id="overlayModule">
+    <div class="fa fa-spinner fa-spin" style="font-size: 70px;"></div>
+</div>

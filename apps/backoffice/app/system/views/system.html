@@ -1,0 +1,251 @@
+<ns-box data-title="system.environment.t1" title-icon="fa fa-server fa-lg">
+
+    <div ng-show="showLoading">
+        <h1 translate>system.environment.other.restartProgress</h1>
+    </div>
+    <form ng-show='!showLoading' name="form" ng-submit="validate(tab.fields, tab.id, local.setAttrCode, attributes)"
+        role="form">
+        <ns-buttons hide-save-and-quit="true" disable-save="disableSave" return-path="/" form="form">
+            <div class="scrollmenu">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#security" target="_self"
+                            translate>system.environment.security.title</a></li>
+                    <li><a data-toggle="tab" href="#other" target="_self" translate>system.environment.other.title</a>
+                    </li>
+                    <li><a data-toggle="tab" href="#log" target="_self" translate>system.environment.log.title</a></li>
+                    <li><a data-toggle="tab" href="#search" target="_self" translate>system.environment.searchSettings.title</a></li>
+                </ul>
+            </div>
+            <div class="tab-content ng-scope">
+                <div id="security" class="tab-pane fade in active">
+                    <div>
+                        <h3 translate>system.environment.security.contentPolicy.title</h3>
+                        <div class="form-group">
+                            <ns-switch ng-model="system.environment.contentSecurityPolicy.active" yes-value="Oui"
+                                no-value="Non" name="contentPolicyActive"
+                                ng-change="switchCsp(system.environment.contentSecurityPolicy.active)"></ns-switch>
+                        </div>
+                        <div class="form-group" ng-show="system.environment.contentSecurityPolicy.active">
+                            <table
+                                class="table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable">
+                                <thead>
+                                    <tr>
+                                        <th translate>system.environment.security.contentPolicy.value</th>
+                                        <th translate>system.environment.security.contentPolicy.delAndAdd</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="value in contentPolicy.content">
+                                        <td>{{value}}</td>
+                                        <td><span ng-click="removePolicy(value)"><i class="fa fa-minus-circle fa-2x"
+                                                    aria-hidden="true"></i></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input form="otherForm" type="text" class="form-control"
+                                                ng-keypress="($event.charCode==13) ? addPolicy(contentPolicy.newPolicy) : return"
+                                                ng-model="contentPolicy.newPolicy">
+                                        </td>
+                                        <td>
+                                            <span ng-click="addPolicy(contentPolicy.newPolicy)"><i
+                                                    class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div>
+                        <h3 translate>system.environment.security.ssl.ssl</h3>
+                        <div class="form-group">
+                            <ns-switch ng-model="sslFiles.active" yes-value="true" no-value="false"
+                                name="active"></ns-switch>
+                        </div>
+                        <div ng-show="sslFiles.active">
+                            <div class="form-group">
+                                <label for="cert">
+                                    <span class="btn btn-default" translate>system.environment.security.ssl.cert</span>
+                                    <input type="file" name="cert" id="cert" style="display:none" ssl-file="sslFiles.cert" onchange="angular.element(this).scope().sendSSLFiles(this)" />
+                                        
+                                </label>
+                                <span>{{sslFiles.cert.name}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="key">
+                                    <span class="btn btn-default" translate>system.environment.security.ssl.key</span>
+                                    <input type="file" name="key" id="key" style="display:none" ssl-file="sslFiles.key" onchange="angular.element(this).scope().sendSSLFiles(this)" />
+                                </label>
+                                <span>{{sslFiles.key.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="other" class="tab-pane fade">
+                    <h3 translate>system.environment.other.database</h3>
+                    <br />
+                    <div class="form-group">
+                        <label translate>system.environment.other.connectionString</label>
+                        <input type="text" class="form-control" ng-model="system.environment.databaseConnection"
+                            class="btn btn-default">
+                    </div>
+                    <div class="form-group">
+                        <a download class="btn btn-success" ng-click="dumpDatabase()" ng-disabled="disabledButton"
+                            translate>
+                            system.environment.other.dlDBAnonymized
+                        </a>
+                    </div>
+                    <h3 translate>system.environment.other.dlAllDocumentTitle</h3>
+                    <br />
+                    <div class="form-group">
+                        <a download class="btn btn-success" ng-click="downloadDocuments()" ng-disabled="disabledButton"
+                            translate>
+                            system.environment.other.dlAllDocument
+                        </a>
+                        <div translate>system.environment.other.dlAllDocumentInfo</div>
+                    </div>
+                    <div class="form-group">
+                        <label translate>system.environment.other.uploadAllDocument</label>
+                        <ns-upload-files accepttype=".zip" multiple="false" type="document" is-selected="isSelected"
+                            before-function="beforeDocument" after-function="uploadedDocument"></ns-upload-files>
+                        <div translate>system.environment.other.uploadAllDocumentInfo</div>
+                    </div>
+                </div>
+                <div id="log" class="tab-pane fade">
+                    <h3 translate>system.environment.log.titleMenu</h3>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-success" ng-click="refreshLog()">
+                            <p translate>system.environment.log.refreshLog</p>
+                        </button>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label translate>system.environment.log.logFileTitle</label><br />
+                        <input type="text" class="form-control" ng-model="system.environment.logPath"
+                            value="{{system.environment.logPath}}">
+                    </div>
+                    <div class="form-group">
+                        <label translate>system.environment.log.logTitle</label>
+                        <textarea rows="20" class="form-control" ng-model="log.log" readonly
+                            style="font-size: 10px;line-height: 13px;"></textarea>
+                    </div>
+                    <div class="pull-right">
+                        <span>{{log.displayedLinesLogs}}</span>
+                        <span translate>system.environment.log.linesDisplayed</span>
+                        <button type="button" class="btn btn-success" ng-click="pageIncrease('log')">
+                            <p translate>system.environment.log.seeMoreLogs</p>
+                        </button>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label translate>system.environment.log.errorFileTitle</label>
+                        <input type="text" class="form-control" ng-model="system.environment.errorPath"
+                            value="{{system.environment.errorPath}}">
+                    </div>
+                    <div class="form-group">
+                        <label translate>system.environment.log.errorTitle</label><br />
+                        <textarea rows="20" class="form-control" ng-change="zaer" ng-model="log.error" readonly
+                            style="font-size: 10px;line-height: 13px;"></textarea>
+                    </div>
+                    <div class="pull-right">
+                        <span>{{log.displayedLinesErrors}}</span>
+                        <span translate>system.environment.log.linesDisplayed</span>
+                        <button type="button" class="btn btn-success" ng-click="pageIncrease('error')">
+                            <p translate>system.environment.log.seeMoreErrors</p>
+                        </button>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <div id="search" class="tab-pane fade">
+                    <h3 translate>system.environment.searchSettings.title</h3>
+                    <br />
+                    <div style="max-width: 1000px;  display: block; margin: 0 auto;">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="shouldSort" class="form-label">shouldSort</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="shouldSort" ng-model="system.environment.searchSettings.shouldSort"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="ignoreLocation" class="form-label">ignoreLocation</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="ignoreLocation" ng-model="system.environment.searchSettings.ignoreLocation"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="findAllMatches" class="form-label">findAllMatches</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="findAllMatches" ng-model="system.environment.searchSettings.findAllMatches"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="ignoreFieldNorm" class="form-label">ignoreFieldNorm</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="ignoreFieldNorm" ng-model="system.environment.searchSettings.ignoreFieldNorm"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="includeScore" class="form-label">includeScore</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="includeScore" ng-model="system.environment.searchSettings.includeScore"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="useExtendedSearch" class="form-label">useExtendedSearch</label>
+                                <div class="col-md-6">
+                                    <ns-switch name="useExtendedSearch" ng-model="system.environment.searchSettings.useExtendedSearch"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="minMatchCharLength" class="form-label">minMatchCharLength</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="minMatchCharLength" ng-model="system.environment.searchSettings.minMatchCharLength" style="max-width: 132px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-6" for="threshold" class="form-label">threshold</label>
+                                <div class="col-md-6">
+                                    <input type="number" step="0.1" class="form-control" name="threshold" ng-model="system.environment.searchSettings.threshold" style="max-width: 132px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p style="text-align: right;font-style: italic"><span translate>system.environment.searchSettings.findDoc</span><span><a style="text-decoration: underline;" href="https://fusejs.io/api/options.html" target="_blank">https://fusejs.io/api/options.html</a></span></p>
+                        </div>
+                        <h3 translate>system.environment.searchSettings.keysWeight</h3>
+                        <div class="row keys">
+                            <div ng-repeat="key in system.environment.searchSettings.keys track by $index" class="col-md-6 form-group key">
+                                <label class="col-md-6" for="{{key.name}}" class="form-label">{{key.translation[adminLang].label}}</label>
+                                <div class="col-md-6">
+                                    <input type="number" step="0.1" class="form-control" name="{{key.name}}" ng-model="key.weight" style="max-width: 132px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ns-buttons>
+    </form>
+    <div ng-show="showLoading" style="text-align: center;">
+        <h3 translate>system.environment.redemarrage</h3>
+        <h4 translate>system.environment.redirect</h4>
+        <h4>
+            <i>
+                <a href="{{urlRedirect}}">{{urlRedirect}}</a>
+            </i>
+        </h4>
+        <div class="loader"></div>
+    </div>
+    <div ng-show="showThemeLoading" id="overlayModule">
+        <div class="fa fa-spinner fa-spin" style="font-size: 70px;"></div>
+    </div>
+</ns-box>

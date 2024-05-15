@@ -1,0 +1,25 @@
+{
+    "list": {
+        "t1": "Blocs CMS",
+        "code": "Code",
+        "desc": "Description",
+        "search": "Recherche"
+    },
+    "detail": {
+        "t1": "Blocs CMS",
+        "code": "Code",
+        "champRequis": "Ce champ est requis.",
+        "desc": "Description",
+        "content": "Contenu",
+        "preview": "Prévisualiser",
+        "group": "Groupe",
+        "html": "HTML",
+        "variables": "Variables",
+        "result": "Resultat",
+        "blocSaved": "Bloc CMS sauvegardé !",
+        "blocDeleted": "Bloc supprimé",
+        "failDelete": "Echec de la suppression",
+        "noVars": "Pas de variable"
+
+    }
+}

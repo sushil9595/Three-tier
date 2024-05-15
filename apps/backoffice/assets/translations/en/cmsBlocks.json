@@ -1,0 +1,25 @@
+{
+    "list": {
+        "t1": "CMS Blocks",
+        "code": "Code",
+        "desc": "Description",
+        "search": "Search"
+    },
+    "detail": {
+        "t1": "CMS Blocks",
+        "code": "Code",
+        "champRequis": "This field is required.",
+        "desc": "Description",
+        "content": "Content",
+        "preview": "Preview",
+        "group": "Group",
+        "html": "HTML",
+        "variables": "Vars",
+        "result": "Result",
+        "blocSaved": "CMS block saved!",
+        "blocDeleted": "Block deleted",
+        "failDelete": "Deletion failed",
+        "noVars": "No vars"
+
+    }
+}

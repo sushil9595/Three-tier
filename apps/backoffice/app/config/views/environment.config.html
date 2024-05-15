@@ -1,0 +1,149 @@
+<ns-box data-title="config.environment.t1" title-icon="fa fa-cogs fa-lg">
+    <form name="form" ng-submit="validate(tab.fields, tab.id, local.setAttrCode, attributes)" ng-show="!showLoading" role="form">
+        <ns-buttons hide-save-and-quit="true" disable-save="disableSave" return-path="/" form="form">
+            <div class="scrollmenu">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#general" target="_self" translate>config.environment.menu.general</a></li>
+                    <li><a data-toggle="tab" href="#path" target="_self" translate>config.environment.menu.path</a></li>
+                    <li><a data-toggle="tab" href="#mail" target="_self" translate>config.environment.menu.mail</a></li>
+                    <li><a data-toggle="tab" href="#other" target="_self" translate>config.environment.menu.other</a></li>
+                </ul>
+            </div>
+
+            <div class="tab-content" style="width:50%;margin-left:10%">
+
+                <div id="general" class="tab-pane fade in active">
+                    <h3 translate>config.environment.menu.general</h3>
+                    <br/>
+                    <div class="form-group">
+                        <label translate>config.environment.billsPattern</label> <br />
+                        <input type="text" class="form-control" ng-model="config.environment.billsPattern">
+                        <span translate="">config.environment.billsVariables</span>
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.websiteCountry</label> <br />
+                        <select name="countries" id="countries" class="form-control"
+                            ng-options="country.code as country.translation[adminLang].name for country in countries"
+                            ng-model="config.environment.websiteCountry" >
+                            <option value="" translate>config.environment.selectCountry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.websiteTimezone</label> <br />
+                        <select name="timezones" id="timezones" class="form-control"
+                                ng-options="tz as tz for tz in timezones"
+                                ng-model="config.environment.websiteTimezone" >
+                            <option value="" translate>config.environment.selectTimezone</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.demoMode</label> <br />
+                        <ns-switch ng-model="config.environment.demoMode"  name="demoMode"></ns-switch>
+                    </div>
+                </div>
+
+                <div id="path" class="tab-pane fade">
+                    <h3 translate>config.environment.menu.path</h3>
+                    <br/>
+                    <div class="form-group">
+                        <label translate>config.environment.baseURL</label>
+                        <input type="url" class="form-control" ng-model="config.environment.appUrl">
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.prefixeURL</label>
+                        <input type="text" class="form-control" ng-model="config.environment.adminPrefix" type="button" class="btn btn-default" popover="{{'config.environment.prefixURL' | translate}}" popover-trigger="mouseenter" >
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label translate>config.environment.picsPath</label><i style="margin-left:10px" class="fa fa-question-circle" popover="{{'config.path.mediaHelper' | translate}}" popover-trigger="mouseenter" aria-hidden="true"></i>
+                        <input type="text" class="form-control" ng-model="config.environment.photoPath">
+                    </div>
+                </div>
+
+                <div id="mail" class="tab-pane fade">
+                    <h3 translate>config.environment.menu.mail</h3>
+                    <br/>
+
+                    <div class="form-group">
+                        <label translate>config.environment.host</label>
+                        <input type="text" class="form-control" ng-model="config.environment.mailHost" ng-disabled="config.environment.mailIsSendmail" />
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.port</label>
+                        <input type="number" class="form-control" ng-model="config.environment.mailPort" ng-disabled="config.environment.mailIsSendmail" />
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.user <span ng-show="messageMail" style="color: #d2322d;"
+                                ng-bind-html="messageMail"></span></label>
+                        <input type="text" class="form-control" ng-model="config.environment.mailUser" ng-disabled="config.environment.mailIsSendmail" />
+                    </div>
+                    <div class="form-group">
+                        <label translate>config.environment.mdp</label>
+                        <input type="password" class="form-control" ng-model="config.environment.mailPass" ng-disabled="config.environment.mailIsSendmail" />
+                    </div>
+                    <div class="form-group">
+                        <label>Secure (old: {secure: Number(mailPort) !== 587})</label>
+                        <div>
+                            <ns-switch ng-model="config.environment.mailSecure" yes-value="Oui" no-value="Non" name="mailSecure"></ns-switch>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <div>
+                            <ns-switch ng-model="config.environment.mailIsSendmail" yes-value="Sendmail" no-value="SMTP" name="mailIsSendmail"></ns-switch>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label translate>config.environment.overrideSendTo</label>
+                        <input type="text" class="form-control" ng-model="config.environment.overrideSendTo" />
+                    </div>
+                    <hr />
+                    <label translate>config.environment.sendMailTest</label>
+                    <br />
+                    <label style="color:red;" translate>config.environment.informationsMail</label>
+                    <div style="margin-top:5px">
+                        <a download class="btn btn-success" ng-click="testMail(adminLang)" translate>
+                            config.environment.test
+                        </a>
+                    </div>
+
+                </div>
+
+                <div id="other" class="tab-pane fade">
+                    <h3>Robot.txt</h3>
+                    <a download class="btn btn-success"ng-click="editRobot()" translate>
+                        config.environment.editRobot
+                    </a>
+                    <h3 translate>config.environment.cache</h3>
+                    <br />
+                    <div class="form-group">
+                        <label translate>config.environment.ttlCache</label>
+                        <input type="text" class="form-control" ng-model="config.environment.cacheTTL" class="btn btn-default">
+                    </div>
+
+                    <h3 translate>config.environment.datasAnonyme</h3>
+                    <br />
+                    <div class="form-group">
+                        <ns-switch ng-model="config.environment.sendMetrics.active" yes-value="Oui" no-value="Non" name="sendMetrics"></ns-switch>
+                    </div>
+                </div>
+            </div>
+        </ns-buttons>
+    </form>
+
+    <div ng-show="showLoading" style="text-align: center;">
+        <h3 translate>config.environment.redemarrage</h3>
+        <h4 translate>config.environment.redirect</h4>
+        <h4>
+            <i>
+                <a href="{{urlRedirect}}">{{urlRedirect}}</a>
+            </i>
+        </h4>
+        <div class="loader"></div>
+    </div>
+
+    <div ng-show="showThemeLoading" id="overlayModule">
+        <div class="fa fa-spinner fa-spin" style="font-size: 70px;"></div>
+    </div>
+</ns-box>

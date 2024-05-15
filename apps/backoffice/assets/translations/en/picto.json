@@ -1,0 +1,43 @@
+{
+    "details": {
+        "t1": "Pictograms",
+        "gen": "General",
+        "rules": "Rules",
+        "saveFirst": "You must save the pictogram first, before adding a picture",
+        "click": "Click on the picture to replace it",
+        "jpg": "(.jpg, .png)",
+        "code": "Code",
+        "title": "Title",
+        "place": "Location",
+        "topLeft": "Top left",
+        "topCenter": "Top center",
+        "topRight": "Top right",
+        "midLeft": "Middle left",
+        "midRight": "Middle right",
+        "botLeft": "Bottom left",
+        "botCenter": "Bottom center",
+        "botRight": "Bottom right",
+        "actif": "Active",
+        "dispoFiltres": "Available in automatic filters:",
+        "pictoDone": "Pictorisation : done",
+        "formRuleIncomplete": "Rules form incomplete",
+        "pictoSegmentation": "Backup performed, launch the scheduled task 'Segmentation picto'",
+        "formPictoIncomplete": "Incomplete pictogram form",
+        "rulesFail": "Failed to save rules",
+        "ruleSaved": "Saved rule(s)",
+        "pictorisation": "Perform pictorization",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "infoRules":"The products whose following this rules will contain this pictogram :"
+
+    },
+    "list": {
+        "t1": "Pictograms",
+        "code": "Code",
+        "title": "Title",
+        "img": "Picture",
+        "used": "Used in filters",
+        "actif": "Active",
+        "noImg": "No picture"
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@aquilacms/bo-angularjs",
+  "version": "1.0.0",
+  "description": "AquilaCMS Backoffice v1",
+  "private": true,
+  "license": "OSL-3.0",
+  "engines": {
+    "node": ">=18"
+  }
+}

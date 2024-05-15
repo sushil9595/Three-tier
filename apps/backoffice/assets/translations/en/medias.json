@@ -1,0 +1,70 @@
+{
+    "medias": {
+        "t1": "Media",
+        "nom": "Name",
+        "lien": "Link",
+        "miniature": "Thumbnail",
+        "cpLien": "Generate link",
+        "delete": "Delete",
+        "deleteMedia": "Media deleted",
+        "copiedLink": "Copied link",
+        "mediaSaved": "Saved media",
+        "uploadInsert": "Insert in database",
+        "uploadButton": "Massive adding"
+    },
+    "new": {
+        "t1": "New Media",
+        "ph1": "File name",
+        "nom": "Name",
+        "lien": "Link :",
+        "cpLien": "Generate link",
+        "media": "Media",
+        "add": "Add",
+        "group": "Group",
+        "uploadText": "Save the media to upload"
+    },
+    "uploadMedias": {
+        "queue": "Queue :",
+        "dropFiles": "Drop files here or click to upload",
+        "dropImages": "Drop images here or click to upload",
+        "dropVideos": "Drop videos here or click to upload",
+        "dropPdfs": "Drop PDFs here or click to upload",
+        "upload": "Upload",
+        "uploadnotstarted": "Upload not started",
+        "uploadsuccessful": "Upload successful",
+        "name": "Name",
+        "alt": "Alt tag",
+        "picture": "Picture :"
+    },
+    "modal": {
+        "title": "Copy link",
+        "width": "Width in pixel :",
+        "height": "Height in pixel :",
+        "quality": "Quality (0 to 100) :",
+        "name": "Name :",
+        "copy": "Copy link",
+        "background": "Background color :",
+        "link": "Link",
+        "generate": "Generate",
+        "crop": "Crop :",
+        "position": "Position :",
+        "center": "Center",
+        "top": "Top",
+        "bottom": "Bottom",
+        "left": "Left",
+        "right": "Right",
+        "topLeft": "Top left",
+        "topRight": "Top right",
+        "bottomLeft": "Bottom left",
+        "bottomRight": "Bottom right",
+        "enterAllValue": "Please enter all values.",
+        "linkGenerated": "Generated link",
+        "massAddDone": "Mass addition performed.",
+        "takeTime": "It may take a while, please wait ..."
+    },
+    "multi": {
+        "title": "Massive adding",
+        "cancel": "Cancel",
+        "uploadInfo": "Only .zip are accepted. Files must be at the root of .zip."
+    }
+}

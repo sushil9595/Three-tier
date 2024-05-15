@@ -1,0 +1,54 @@
+{
+    "detail": {
+        "t1": "Détail article",
+        "ph1": "Titre",
+        "urlKey": "Slug",
+        "oldUrl": "L'ancienne URL ne fonctionnera plus si ce champ est modifié",
+        "title": "Titre",
+        "visible": "Visible",
+        "img": "Image",
+        "tags": "Tags",
+        "addTag": "Nouveau tag",
+        "add": "Ajouter",
+        "invalidEntry": "Les informations saisies ne sont pas valides.",
+        "slugEverUsed": "Ce slug est déjà utilisée, merci d'en choisir une autre",
+        "itemSaved": "Article sauvegardé !",
+        "errorSaved": "Une erreur est survenue lors de la sauvegarde.",
+        "imgDelete": "Image supprimée",
+        "articleNotExist": "Cet article n'existe pas",
+        "slugEmpty": "Le slug ne doit pas être vide",
+        "infoSaved": "Informations sauvegardées !",
+        "content": "Contenu",
+        "newError": "ERROR: Le tag est vide ou existe déjà"
+    },
+    "new": {
+        "t1": "Nouvel article",
+        "ph1": "Si vous ne remplissez pas ce champ, il sera genere automatiquement",
+        "ph2": "Titre",
+        "phTag": "Tag",
+        "urlKey": "Slug",
+        "title": "Titre",
+        "visible": "Visible",
+        "img": "Image",
+        "add": "Ajouter",
+        "content": "Contenu",
+        "saveFirst": "Vous devez d'abord enregistrer l'article avant d'y ajouter une image"
+    },
+    "articles": {
+        "t1": "Saisie d'articles",
+        "urlKey": "Slug",
+        "title": "Titre",
+        "visible": "Visible",
+        "yes": "Oui",
+        "no": "Non",
+        "indiff": "Indifferent",
+        "itemDelete": "Article supprimé",
+        "creaDate": "Date de création"
+    },
+    "newTag": {
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "newTag": "Nouveau tag",
+        "name": "Nom"
+    }
+}

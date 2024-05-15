@@ -1,0 +1,16 @@
+<ns-box data-title="slider.list.t1" title-icon="fa fa-film fa-lg" new-href="#/component/slider/new" hook-slider-list> 
+    <table class="shortTable table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable">
+        <thead>
+            <tr>
+                <th translate>slider.list.code</th>
+                <th translate>slider.list.imgs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pointer" ng-repeat="slider in sliders | orderBy:'code'" ng-click="goToSliderDetails(slider._id)">
+                <td data-label="Code :">{{slider.code}}</td>
+                <td data-label="Images :">{{slider.items.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ns-box>

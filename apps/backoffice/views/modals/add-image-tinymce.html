@@ -1,0 +1,96 @@
+<style>
+    .modal-dialog {
+        width: 1200px;
+        padding:30px;
+    }
+
+    .modal {
+    z-index: 30050 !important;
+}
+.modal-backdrop {
+    z-index: 30040 !important;
+}
+    /* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+</style>
+
+<div>
+    <div class="modal-header" translate>
+        tinymce.modal.addImage
+    </div>
+    <div class="modal-body">
+
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
+            <div class="row">
+                <div class="col-sm-6" style="margin-top: 20px;">
+                    <div class="dataTables_filter">
+                        <label for="q" translate>static.list.search</label>
+                        <input group="search" ng-model="local.search" ng-change="onPageChange(1)" class="search-field" name="q"
+                            id="q" value="" placeholder="{{'static.list.search' | translate}}" style="width: 100%; max-width: none;">
+                    </div>
+                </div>
+                <div class="col-sm-6" >
+                    <ns-upload-files class="col-md-8" is-selected="nsUploadFiles.isSelected" accepttype="image/*" multiple="false" type="media" id="id" entity="media" after-function="onPageChange"></ns-upload-files>
+                </div>
+            </div>
+            <div class="scrollmenu" style="padding-top: -20px;">
+                <ul class="nav nav-tabs">
+                    <li ng-show="local.search === ''" class="{{currentTab === group ? 'active' : ''}}"
+                        ng-repeat="group in groups | filterListGeneral"><a href="" ng-click="changeTab(group)"
+                            target="_self">{{group}}</a></li>
+                    <li ng-show="local.search !== ''" class="{{local.search !== '' ? 'active' : ''}}"><a data-toggle="tab"
+                            href="#search" target="_self" translate>static.list.search</a></li>
+                </ul>
+            </div>
+
+            <div class="row" style="margin-top:20px">
+            <!-- <div class="row" style="margin-bottom:30px;overflow:scroll; height:70vh;overflow-x: hidden;padding:15px 20px"> -->
+                <div ng-repeat="lMedia in list">
+                    <div ng-if="lMedia.extension && ((['.png', '.jpg']).includes(lMedia.extension.toLowerCase()))" class="col-md-3" style="text-align: center;margin-bottom:20px">
+                        <button ng-if="imageId === lMedia._id" style="box-shadow: 0px 0px 20px 5px #576fa1;"
+                            ng-click="selectImage(lMedia)"><img
+                                ng-src="/images/medias/200x100-50/{{lMedia._id}}/{{lMedia.link.split('/')[lMedia.link.split('/').length - 1]}}"
+                                alt=""></button>
+                        <button ng-if="imageId !== lMedia._id" ng-click="selectImage(lMedia)"><img
+                                ng-src="/images/medias/200x100-50/{{lMedia._id}}/{{lMedia.link.split('/')[lMedia.link.split('/').length - 1]}}"
+                                alt=""></button>
+                        <br />
+                        <label>{{lMedia.name || '-'}}</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="modal-footer" style="background:#EEE">
+        <div class="form form-horizontal" style="display: block; margin: 0 auto;  max-width: 600px;">
+            <ns-form-image-cache></ns-form-image-cache>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#/medias"><button ng-click="cancel()" style="float:left" class="btn btn-default" translate>tinymce.modal.medias</button></a>
+        <button class="btn btn-default" ng-click="cancel()" translate>tinymce.modal.cancel</button>
+        <button class="btn btn-default" ng-disabled="!imageSelected || (info.max === false && (info.width === undefined || info.width === null || info.height === undefined || info.height === null || info.width < 0 || info.height < 0 )) " ng-click="generate(generer())" translate>tinymce.modal.add</button>
+    </div>
+</div>

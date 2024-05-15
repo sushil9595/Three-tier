@@ -1,0 +1,39 @@
+{
+    "t1": "Modules",
+    "addMod": "Pour ajouter un module, glissez le fichier .zip fourni dans la zone ci-dessous",
+    "nom": "Nom",
+    "desc": "Description",
+    "ver": "Version",
+    "actif": "Actif ?",
+    "activate": "Oui",
+    "deactivate": "Non",
+    "actions": "ACTIONS",
+    "config": "Configurer",
+    "delete": "Supprimer",
+    "shopping": "Google Shopping",
+    "choosePackageVersions": "Des versions sont en conflits choisissez celle que vous souhaitez gardez",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "api": "API",
+    "theme": "THEME",
+    "info": "Informations",
+    "errorUnknown": "Une erreur inconnue s'est produite",
+    "addModule": "Module ajouté update en cours, veuillez patientez !",
+    "activateModule": "Module ajouté ! Pour l'utiliser, il suffit de l'activer",
+    "errorActiveModule": "Problème à l'ajout du module",
+    "restartFail": "Le restart automatique a échoué veuillez redémarrer manuellement",
+    "modalReadMe": {
+        "title": "README.md du module",
+        "close": "Fermer"
+    },
+    "new": {
+        "createNewModule": "Ajouter un nouveau module",
+        "cancel": "Annuler"
+    },
+    "toast": {
+        "errGetPlugins": "Impossible de récupérer la liste des modules"
+    },
+    "installDepsStart": "L'installation a commencé ...",
+    "installDepsSuccess":"Installation terminée avec succès",
+    "installDepsFailed": "L'installation c'est terminée avec des erreurs"
+}

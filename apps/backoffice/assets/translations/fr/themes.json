@@ -1,0 +1,43 @@
+{
+    "t1": "Thèmes",
+    "themes": "Thèmes",
+    "defaut": "Défaut :",
+    "use": "Utiliser",
+    "custom": "Personnalisés :",
+    "themeChoice": "Choix du thème",
+    "currentThemeVar": "Modifier les variables du thème courant.",
+    "noThemeVar": "Ce thème n'est pas customisable",
+    "themePort": "Port du thème",
+    "myTheme": "Mes thèmes",
+    "customisation": "Personnalisation",
+    "data": "Données du theme",
+    "newtheme": "Ajout d'un thème",
+    "themeDatas": "Données du thème",
+    "themeDatasLead": "Installer les données du thème",
+    "themeDatasOverride": "Ecraser les données existantes",
+    "remove": "Supprimer le thème",
+    "required": "Requis",
+    "noDefaultData": "Pas de donnée par default pour ce thème",
+    "filesHelper": "Medias, photo, Carrousel...",
+    "new": {
+        "createNewTheme": "Ajouter un nouveau thème",
+        "cancel": "Annuler"
+    },
+    "themeSelect": "Sélectionner ce thème",
+    "themeInstallDependencies": "Installer les dépendances de ce thème",
+    "themeCompile": "Compiler le thème",
+    "deleteTheme": "Thème supprimé avec succès.",
+    "themeNoData": "Ce thème ne contient pas de données.",
+    "copyThemeDataDone": "Données du thème copiées avec succès.",
+    "varSaved": "Variables sauvegardées.",
+    "addedTheme": "Thème ajouté ! Pour l'utiliser, il suffit de le selectionner",
+    "themeDelete": "Supprimer le thème",
+    "configThemeVar": "Configuration actuelle",
+    "themeInstallAllDependencies": "Installer les dépendances et les dépendances de développement de ce thème (redémarrage necessaire).",
+    "themeActions": "Actions du thème",
+    "actions": {
+        "install": "yarn install",
+        "installAll": "yarn install (all)",
+        "build": "Compiler"
+    }
+}

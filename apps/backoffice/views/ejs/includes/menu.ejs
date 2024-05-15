@@ -1,0 +1,515 @@
+<nav class="nav-fixed">
+
+    <select class="nav-margin form-control hidden" style="padding: 0 5px" ng-model="adminLang" ng-change="adminLangChange(adminLang)">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+    </select>
+    <select class="nav-margin form-control" ng-model="adminLang" ng-change="adminLangChange(adminLang)">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+    </select>
+
+    <ul>
+        <li class="parent" ng-show="!(accessList.includes('orders')) || !(accessList.includes('payments')) || !(accessList.includes('invoices')) || !(accessList.includes('cart'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-handshake-o fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.transactions</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('orders'))">
+                    <a href="#/orders" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-shopping-cart fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.commandes</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('payments'))">
+                    <a href="#/payments" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-credit-card fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.paiements</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('invoices'))">
+                    <a href="#/invoices" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-usd fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.factures</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('cart'))">
+                    <a href="#/cart" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-opencart fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.carts</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="parent" ng-show="!(accessList.includes('products')) || !(accessList.includes('categories')) || !(accessList.includes('promos')) || !(accessList.includes('picto')) || !(accessList.includes('attributes')) || !(accessList.includes('trademarks')) || !(accessList.includes('suppliers')) || !(accessList.includes('families'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-database fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.catalogue</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('products'))">
+                    <a href="#/products" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-cubes fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.produits</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('categories'))">
+                    <a href="#/categories" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-list-ul fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.categories</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('promos'))">
+                    <a href="#/promos" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-percent fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.promotion</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('picto'))">
+                    <a href="#/picto" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-gratipay fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.picto</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('attributes'))">
+                    <a href="#/products/setAttributes" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-align-justify fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.jeuxAttributs</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('attributes'))">
+                    <a href="#/products/attributes" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-align-center fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.attributs</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('trademarks'))">
+                    <a href="#/trademarks" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-creative-commons fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.marques</span>
+                    </a>
+                </li>
+                <li  ng-if="!(accessList.includes('suppliers'))">
+                    <a href="#/suppliers" class="menuClick">
+                        <span class="icon">
+                                <i class="fa fa-industry fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.fournisseurs</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('families'))">
+                    <a href="#/families" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-shopping-bag fa-lg"></i>
+                        </span>
+                        <span translate>menu.familles</span>
+                    </a>
+                </li>
+                <li ng-repeat="menuCatalog in menusCatalog">
+                    <a href="#{{menuCatalog.route}}" class="menuClick">
+                        <span class="icon">
+                            <i class="{{menuCatalog.icon || 'fa fa-cog i-style'}}"></i>
+                        </span>
+                        <span ng-if="menuCatalog.multilang" translate>
+                            {{menuCatalog.title}}
+                        </span>
+                        <span ng-if="!menuCatalog.multilang">
+                            {{menuCatalog.title}}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="parent" ng-show="!(accessList.includes('staticPage')) || !(accessList.includes('cmsBlocks')) || !(accessList.includes('gallery')) || !(accessList.includes('slider')) || !(accessList.includes('medias')) || !(accessList.includes('articles'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-desktop fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.site</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('staticPage'))">
+                    <a href="#/staticPage" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-file-text fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.pages</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('cmsBlocks'))">
+                    <a href="#/cmsBlocks" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-file-code-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.BlocsCMS</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('gallery'))">
+                    <a href="#/component/gallery" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-picture-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.galerie</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('slider'))">
+                    <a href="#/component/slider" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-film fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.carousel</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('medias'))">
+                    <a href="#/medias" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-file-image-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.medias</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('articles'))">
+                    <a href="#/site/articles" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-newspaper-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.article</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="parent" ng-show="!(accessList.includes('clients')) || !(accessList.includes('attributes')) || !(accessList.includes('reviews')) || !(accessList.includes('contacts')) || !(accessList.includes('newsletters'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-users fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.clients</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('clients'))">
+                    <a href="#/clients" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-users fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.clients</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('attributes'))">
+                    <a href="#/users/setAttributes" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-align-justify fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.jeuxAttributs</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('attributes'))">
+                    <a href="#/users/attributes" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-align-center fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.attributs</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('reviews'))">
+                    <a href="#/reviews" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-star-half-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.avis</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('contacts'))">
+                    <a href="#/contacts" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-id-card fa-lg i-style"></i>
+                        </span>
+                        <span>Contacts</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('newsletters'))">
+                    <a href="#/client/newsletters" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-newspaper-o fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.newsletter</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="parent" ng-show="!(accessList.includes('config')) || !(accessList.includes('stock')) || !(accessList.includes('mails')) || !(accessList.includes('shipments')) || !(accessList.includes('territories')) || !(accessList.includes('languages')) || !(accessList.includes('paymentMethods'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-wrench fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.configuration</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('mails'))">
+                    <a href="#/mails" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-envelope fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.mails</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('shipments'))">
+                    <a href="#/shipments" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-truck fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.modesExpedition</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('territories'))">
+                    <a href="#/territories" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-globe fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.territories</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('languages'))">
+                    <a href="#/languages" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-flag fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.langues</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('paymentMethods'))">
+                    <a href="#/paymentMethods" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-credit-card-alt fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.modesPaiement</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('config'))">
+                    <a href="#/config/storefront" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-desktop fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.frontSetting</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="parent" ng-show="!(accessList.includes('themes')) || !(accessList.includes('design')) || !(accessList.includes('translate'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-desktop fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.design</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('themes'))">
+                    <a href="#/themes" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-desktop fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.themes</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('design'))">
+                    <a href="#/site/design" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-paint-brush fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.css</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('translate'))">
+                    <a href="#/site/translate" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-language fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.translate</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="parent" ng-show="!(accessList.includes('config')) || !(accessList.includes('stock'))  || !(accessList.includes('jobs'))  || !(accessList.includes('system'))  || !(accessList.includes('update'))  || !(accessList.includes('admin'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-cog fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.settings</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('config'))">
+                    <a href="#/config/environment" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-cogs fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.environnement</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('stock'))">
+                    <a href="#/stock" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-cart-plus fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.stock&commandes</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('system'))">
+                    <a href="#/system" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-server fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.system</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('jobs'))">
+                    <a href='#/jobs' , class='menuClick'>
+                        <span class="icon"></span>
+                        <i class="fa fa-calendar fa-lg i-style"></i>
+                        <span translate>menu.tachesPlanifiees</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('update'))">
+                    <a href="#/update" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-medkit  fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.update</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('admin'))">
+                    <a href="#/list" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-shield fa-lg i-style"></i>
+                        </span>
+                        <span translate>menu.admin</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="parent" ng-if="!(accessList.includes('modules'))">
+            <a href="#/modules" class="menuClick">
+                <span class="main-icon">
+                    <i class="fa fa-plug fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span translate>menu.modules</span>
+                </span>
+            </a>
+        </li>
+
+
+        <li ng-repeat="menu in menus" class="parent">
+            <a href="#{{menu.route}}" class="menuClick">
+                <span class="main-icon">
+                    <i class="{{menu.icon || 'fa fa-cog fa-2x i-style'}}"></i>
+                </span>
+                <span class="nav-content" ng-if="menu.multilang">
+                    <span translate>{{menu.title}}</span>
+                </span>
+                <span class="nav-content" ng-if="!menu.multilang">
+                    <span>{{menu.title}}</span>
+                </span>
+            </a>
+        </li>
+
+
+       <li class="parent" ng-show="!(accessList.includes('statistics'))">
+            <a href="#">
+                <span class="main-icon">
+                    <i class="fa fa-bar-chart fa-2x i-style"></i>
+                </span>
+                <span class="nav-content">
+                    <span>Stats</span>
+                    <i class="ico-arrow-down"></i>
+                </span>
+            </a>
+            <ul class="dropdown">
+                <li ng-if="!(accessList.includes('statistics'))">
+                    <a href="#/statistics" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-bar-chart fa-lg i-style"></i>
+                        </span>
+                        <span>General</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('statistics'))">
+                    <a href="#/statistics/sells" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-bar-chart fa-lg i-style"></i>
+                        </span>
+                        <span>Sells</span>
+                    </a>
+                </li>
+                <li ng-if="!(accessList.includes('statistics'))">
+                    <a href="#/statistics/clients" class="menuClick">
+                        <span class="icon">
+                            <i class="fa fa-bar-chart fa-lg i-style"></i>
+                        </span>
+                        <span>Clients</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+    </ul>
+
+<br/><br/><br/><br/><br/><br/>
+
+</nav>

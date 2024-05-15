@@ -1,0 +1,14 @@
+{
+    "shortcodesSchema": {
+        "description": "",
+        "properties": {
+            "tag"         : {"type": "string", "required": true},
+            "weight"      : {"type": "number"},
+            "createdAt"   : {
+                "type": "string",
+                "format": "date"
+            },
+            "translation" : {"type": "object"}
+        }
+    }
+}

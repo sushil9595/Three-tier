@@ -1,0 +1,77 @@
+<ns-box data-title="paymentMethod.list.t1" title-icon="fa fa-credit-card-alt fa-lg">
+    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid" hook-payment-list>
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <div class="dataTables_filter">
+                    <label>
+                        <input type="search" ng-model="queryText" name="q" id="q" value="" translate translate-attr-placeholder='paymentMethod.list.ph1' class="search-field">
+                    </label>
+                </div>
+            </div>
+        </div> -->
+
+        <table class="shortTable table table-striped table-bordered table-hover bootstrap-datatable datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+            <thead>
+                <tr role="row" style="cursor: pointer">
+                    <th style="width: 200px;">
+                        Logo
+                    </th>
+                    <th>
+                        <a  ng-click="sortType = 'name'; sortReverse = !sortReverse" translate>
+                            paymentMethod.list.des
+                            <span ng-show="sortType == 'name' && !sortReverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortType == 'name' && sortReverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a  ng-click="sortType = 'isDeferred'; sortReverse = !sortReverse" translate>
+                            paymentMethod.detail.isDeferred
+                            <span ng-show="sortType == 'isDeferred' && !sortReverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortType == 'isDeferred' && sortReverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'active'; sortReverse = !sortReverse" translate>
+                            paymentMethod.list.actif
+                            <span ng-show="sortType == 'active' && !sortReverse" class="ico-chevron-down"></span>
+                            <span ng-show="sortType == 'active' && sortReverse" class="ico-chevron-up"></span>
+                        </a>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        <input type="text" ng-change="getPaymentMethod()" ng-model="filter.code" ng-model-options="{debounce: 500}" translate translate-attr-placeholder='paymentMethod.list.des2' class="form-control">
+                    </th>
+                    <th>
+                        <select ng-model="filter.isDeferred" ng-change="getPaymentMethod()" class="form-control" type="boolean">
+                            <option value="" translate>paymentMethod.list.indiff</option>
+                            <option value="true" translate>paymentMethod.list.yes</option>
+                            <option value="false" translate>paymentMethod.list.no</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select ng-model="filter.active" ng-change="getPaymentMethod()" class="form-control" type="boolean">
+                            <option value="" translate>paymentMethod.list.indiff</option>
+                            <option value="true" translate>paymentMethod.list.actif</option>
+                            <option value="false" translate>paymentMethod.list.noActif</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody role="alert" aria-live="polite" aria-relevant="all">
+                <tr class="pointer"
+                    ng-class-odd="'odd'" ng-class-even="'even'"
+                    ng-click="goToPaymentMethodDetails(method.code)"
+                    ng-repeat="method in paymentMethods| filter:{name: queryText} | orderBy:sortType:sortReverse">
+                    <td data-label="Logo :" ><img ng-src="{{method.translation.fr.urlLogo}}" style="max-width: 100px;max-height:50px" ng-if="method.translation.fr.urlLogo !== ''"/></td>
+                    <td data-label="Désignation :" style="vertical-align: middle">{{method.code}}</td>
+                    <td data-label="Différé :" style="vertical-align: middle">{{method.isDeferred}}</td>
+                    <td data-label="Actif :" style="vertical-align: middle"><span ng-bind-html='method.active | checked'></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ns-box>
